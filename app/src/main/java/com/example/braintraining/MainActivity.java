@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Training.class);
-                intent.putExtra("expressionsCount", String.valueOf(txtExpressionsCount.getText()));
+                intent.putExtra("expressionsCount", Integer.parseInt(txtExpressionsCount.getText().toString()));
                 startActivity(intent);
             }
         });

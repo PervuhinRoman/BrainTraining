@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,16 +28,18 @@ public class Training extends AppCompatActivity {
     String question = "";             // выражение
     int rightAnswer = 0;              // правильный ответ
 
-    List<Integer> userAnswers = new ArrayList<Integer>();              // массив пользовательских ответов
-    List<Integer> rightAnswers = new ArrayList<Integer>();             // массив правильных ответов
+    List<Integer> userAnswers = new ArrayList<>();              // массив пользовательских ответов
+    List<Integer> rightAnswers = new ArrayList<>();             // массив правильных ответов
 
-    int expressionsCount;
-    List<String> expressions = new ArrayList<String>();                // массив выражений
+    int expressionsCount;                                        // кол-во выражений
+    List<String> expressions = new ArrayList<>();                // массив выражений
 
     String[] actions = {"+", "-"};    // список действий
 
     int number;                       // элемент цифры для выражения
     String action;                    // элемент действия для выражения
+
+    int currentExp = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -51,18 +52,24 @@ public class Training extends AppCompatActivity {
         ans3 = (Button) findViewById(R.id.button3);
         txtQuestion = (TextView) findViewById(R.id.question);
 
+        // получение ресурсов цветов
         Resources resources = getResources();
         int okColor = resources.getColor(R.color.okColor,  null);
         int noColor = resources.getColor(R.color.noColor,  null);
 
-        // создание нулевого выражения
-        onButtonClick();
-
         // кол-во выражений, которые необходимо создать, полученное из MainActivity
         Intent expressionsCountIntent = getIntent();
-        expressionsCount = expressionsCountIntent.getIntExtra("expressionsCount", 50);
+        expressionsCount = expressionsCountIntent.getIntExtra("expressionsCount", 51);
         Log.d(LOG_TAG, Integer.toString(expressionsCount));
 
+        // заполнение массива выражений и массива правильных решений
+        for(int i = 0; i < expressionsCount; i++){
+            onButtonClick();
+        }
+
+        // отладочный вывод сгенерированных выражений и правильных ответов
+        Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "Expressions: " + expressions + " length: " + expressions.size());
+        
         // обработка нажатия на вариант ответа #1
         ans1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,6 +144,7 @@ public class Training extends AppCompatActivity {
         }
 
         // готовое выражение
+        expressions.add(question);
         txtQuestion.setText(question);
         question = "";
 
