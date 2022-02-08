@@ -39,7 +39,7 @@ public class Training extends AppCompatActivity {
     int number;                       // элемент цифры для выражения
     String action;                    // элемент действия для выражения
 
-    int currentExp = 0;
+    int currentExp = 0;               // кол-во решённых выражений
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -57,26 +57,33 @@ public class Training extends AppCompatActivity {
         int okColor = resources.getColor(R.color.okColor,  null);
         int noColor = resources.getColor(R.color.noColor,  null);
 
-        // кол-во выражений, которые необходимо создать, полученное из MainActivity
+        // кол-во выражений, которые необходимо решить, полученное из MainActivity
         Intent expressionsCountIntent = getIntent();
-        expressionsCount = expressionsCountIntent.getIntExtra("expressionsCount", 51);
+        expressionsCount = expressionsCountIntent.getIntExtra("expressionsCount", 50);
         Log.d(LOG_TAG, Integer.toString(expressionsCount));
 
-        // заполнение массива выражений и массива правильных решений
-        for(int i = 0; i < expressionsCount; i++){
-            onButtonClick();
-        }
+        // создание "нулевого" выражения
+        onButtonClick();
 
-        // отладочный вывод сгенерированных выражений и правильных ответов
-        Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "Expressions: " + expressions + " length: " + expressions.size());
-        
         // обработка нажатия на вариант ответа #1
         ans1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // проверка кол-ва решённых выражений
+                if(currentExp == expressionsCount - 1){
+                    Intent intent = new Intent(getApplicationContext(), Results.class);
+                    startActivity(intent);
+                }
+
+                // добавление пользовательского ответа в массив пользовательских ответов
                 userAnswers.add(Integer.parseInt(ans1.getText().toString()));
                 Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers);
+
+                // генерация следующего выражения
                 onButtonClick();
+
+                // увеличение кол-ва решённых выражений
+                currentExp++;
             }
         });
 
@@ -84,9 +91,21 @@ public class Training extends AppCompatActivity {
         ans2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // проверка кол-ва решённых выражений
+                if(currentExp == expressionsCount - 1){
+                    Intent intent = new Intent(getApplicationContext(), Results.class);
+                    startActivity(intent);
+                }
+
+                // добавление пользовательского ответа в массив пользовательских ответов
                 userAnswers.add(Integer.parseInt(ans2.getText().toString()));
                 Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers);
+
+                // генерация следующего выражения
                 onButtonClick();
+
+                // увеличение кол-ва решённых выражений
+                currentExp++;
             }
         });
 
@@ -94,14 +113,26 @@ public class Training extends AppCompatActivity {
         ans3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // проверка кол-ва решённых выражений
+                if(currentExp == expressionsCount - 1){
+                    Intent intent = new Intent(getApplicationContext(), Results.class);
+                    startActivity(intent);
+                }
+
+                // добавление пользовательского ответа в массив пользовательских ответов
                 userAnswers.add(Integer.parseInt(ans3.getText().toString()));
                 Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers);
+
+                // генерация следующего выражения
                 onButtonClick();
+
+                // увеличение кол-ва решённых выражений
+                currentExp++;
             }
         });
     }
 
-    // основной метод
+    // основной метод генерации
     public void onButtonClick(){
         // генерация и добавления первой случайной цифры в диапозоне: 1 - 9
         number = (int)(Math.random() * 9 + 1);
@@ -192,4 +223,4 @@ public class Training extends AppCompatActivity {
     }
 }
 
-// TODO: установить ограгичение по кол-ву выражений
+// TODO: реализовать класс Results: вывод результатов, возврат к ActivityMain

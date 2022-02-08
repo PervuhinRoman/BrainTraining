@@ -54,5 +54,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) { }
         });
+
+        Button testBtn = (Button) findViewById(R.id.button4);
+        testBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(getApplicationContext(), Results.class);
+                startActivity(intent1);
+            }
+        });
     }
 }
+
+// TODO: добавить обработку исключений ввода (отсутсвие ввода или буквы) в поле @+id/txtExpressionsCount
+// TODO: добавить таймер
