@@ -13,12 +13,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Parameters"
-        android:layout_weight="1"/>
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_weight="0"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="Expressions count: "
+        android:textSize="20sp"
+        android:layout_marginStart="10dp"/>
+
+    <EditText
+        android:id="@+id/txtExpressionsCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text=""
+        android:hint="1 - 50"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_margin="10dp"/>
+
+    <SeekBar
+        android:layout_marginTop="20dp"
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0" />
 
     <Button
         android:id="@+id/btnApply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button"
-        android:layout_weight="1"/>
+        android:text="Apply"
+        android:layout_weight="1"
+        android:layout_margin="100dp"/>
 </LinearLayout>
