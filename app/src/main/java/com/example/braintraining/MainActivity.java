@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String LOG_TAG = "ArraysState";
 
     Button ans1;
     Button ans2;
@@ -51,12 +54,16 @@ public class MainActivity extends AppCompatActivity {
         int okColor = resources.getColor(R.color.okColor,  null);
         int noColor = resources.getColor(R.color.noColor,  null);
 
+        onButtonClick();
+
+
         // обработка нажатия на вариант ответа #1
         ans1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onButtonClick();
                 userAnswers.add(Integer.parseInt(ans1.getText().toString()));
+                Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers);
+                onButtonClick();
             }
         });
 
@@ -64,8 +71,9 @@ public class MainActivity extends AppCompatActivity {
         ans2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                userAnswers.add(Integer.parseInt(ans2.getText().toString()));
+                Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers);
                 onButtonClick();
-                userAnswers.add(Integer.parseInt(ans1.getText().toString()));
             }
         });
 
@@ -73,8 +81,9 @@ public class MainActivity extends AppCompatActivity {
         ans3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                userAnswers.add(Integer.parseInt(ans3.getText().toString()));
+                Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers);
                 onButtonClick();
-                userAnswers.add(Integer.parseInt(ans1.getText().toString()));
             }
         });
     }
@@ -169,7 +178,6 @@ public class MainActivity extends AppCompatActivity {
         rightAnswer = 0;
     }
 }
-
-// TODO: реализовать сбор результатов
+ 
 // TODO: сверстать новую разметку
 // TODO: установить ограгичение по кол-ву выражений
