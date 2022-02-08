@@ -3,6 +3,7 @@ package com.example.braintraining;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,7 +31,9 @@ public class Training extends AppCompatActivity {
 
     List<Integer> userAnswers = new ArrayList<Integer>();              // массив пользовательских ответов
     List<Integer> rightAnswers = new ArrayList<Integer>();             // массив правильных ответов
-    int currId = 0;
+
+    int expressionsCount;
+    List<String> expressions = new ArrayList<String>();                // массив выражений
 
     String[] actions = {"+", "-"};    // список действий
 
@@ -52,7 +55,13 @@ public class Training extends AppCompatActivity {
         int okColor = resources.getColor(R.color.okColor,  null);
         int noColor = resources.getColor(R.color.noColor,  null);
 
+        // создание нулевого выражения
         onButtonClick();
+
+        // кол-во выражений, которые необходимо создать, полученное из MainActivity
+        Intent expressionsCountIntent = getIntent();
+        expressionsCount = expressionsCountIntent.getIntExtra("expressionsCount", 50);
+        Log.d(LOG_TAG, Integer.toString(expressionsCount));
 
         // обработка нажатия на вариант ответа #1
         ans1.setOnClickListener(new View.OnClickListener() {
