@@ -78,101 +78,28 @@ public class Training extends AppCompatActivity {
         // создание "нулевого" выражения
         onButtonClick();
 
-        // обработка нажатия на вариант ответа #1
-        ans1.setOnClickListener(new View.OnClickListener() {
+        // общий listener для кнопок
+        View.OnClickListener buttonsClickListener = new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-                // проверка кол-ва решённых выражений
-                if(currentExp == expressionsCount - 1){
-                    // создание intent-а для передачи данных между activity и открытия новых активностей
-                    Intent intent = new Intent(getApplicationContext(), Results.class);
-
-                    // передаём кол-во выражений в Results
-                    intent.putExtra("expressionsCount", expressionsCount);
-
-                    // передаём время выполнения в Results
-                    intent.putExtra("time", time);
-                    startActivity(intent);
-
-                    // остановка таймера
-                    timerTask.cancel();
+            public void onClick(View v) {
+                switch (v.getId()){
+                    case R.id.button1:
+                        optimize(ans1);
+                        break;
+                    case R.id.button2:
+                        optimize(ans2);
+                        break;
+                    case R.id.button3:
+                        optimize(ans3);
+                        break;
                 }
-
-                // добавление пользовательского ответа в массив пользовательских ответов
-                userAnswers.add(Integer.parseInt(ans1.getText().toString()));
-                Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers);
-
-                // генерация следующего выражения
-                onButtonClick();
-
-                // увеличение кол-ва решённых выражений
-                currentExp++;
             }
-        });
+        };
 
-        // обработка нажатия на вариант ответа #2
-        ans2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // проверка кол-ва решённых выражений
-                if(currentExp == expressionsCount - 1){
-                    // создание intent-а для передачи данных между activity и открытия новых активностей
-                    Intent intent = new Intent(getApplicationContext(), Results.class);
-
-                    // передаём кол-во выражений в Results
-                    intent.putExtra("expressionsCount", expressionsCount);
-
-                    // передаём время выполнения в Results
-                    intent.putExtra("time", time);
-                    startActivity(intent);
-
-                    // остановка таймера
-                    timerTask.cancel();
-                }
-
-                // добавление пользовательского ответа в массив пользовательских ответов
-                userAnswers.add(Integer.parseInt(ans2.getText().toString()));
-                Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers);
-
-                // генерация следующего выражения
-                onButtonClick();
-
-                // увеличение кол-ва решённых выражений
-                currentExp++;
-            }
-        });
-
-        // обработка нажатия на вариант ответа #3
-        ans3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // проверка кол-ва решённых выражений
-                if(currentExp == expressionsCount - 1){
-                    // создание intent-а для передачи данных между activity и открытия новых активностей
-                    Intent intent = new Intent(getApplicationContext(), Results.class);
-
-                    // передаём кол-во выражений в Results
-                    intent.putExtra("expressionsCount", expressionsCount);
-
-                    // передаём время выполнения в Results
-                    intent.putExtra("time", time);
-                    startActivity(intent);
-
-                    // остановка таймера
-                    timerTask.cancel();
-                }
-
-                // добавление пользовательского ответа в массив пользовательских ответов
-                userAnswers.add(Integer.parseInt(ans3.getText().toString()));
-                Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers);
-
-                // генерация следующего выражения
-                onButtonClick();
-
-                // увеличение кол-ва решённых выражений
-                currentExp++;
-            }
-        });
+        // обработка нажатий на варианты ответов
+        ans1.setOnClickListener(buttonsClickListener);
+        ans2.setOnClickListener(buttonsClickListener);
+        ans3.setOnClickListener(buttonsClickListener);
     }
 
     // основной метод генерации
@@ -301,5 +228,34 @@ public class Training extends AppCompatActivity {
     // форматирование вывода времени
     String formatTime(int seconds, int minutes) {
         return String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
+    }
+
+    // метод выполняющейся при нажатии на один из вариантов ответа
+    void optimize(Button ans){
+        // проверка кол-ва решённых выражений
+        if(currentExp == expressionsCount - 1){
+            // создание intent-а для передачи данных между activity и открытия новых активностей
+            Intent intent = new Intent(getApplicationContext(), Results.class);
+
+            // передаём кол-во выражений в Results
+            intent.putExtra("expressionsCount", expressionsCount);
+
+            // передаём время выполнения в Results
+            intent.putExtra("time", time);
+            startActivity(intent);
+
+            // остановка таймера
+            timerTask.cancel();
+        }
+
+        // добавление пользовательского ответа в массив пользовательских ответов
+        userAnswers.add(Integer.parseInt(ans.getText().toString()));
+        Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers);
+
+        // генерация следующего выражения
+        onButtonClick();
+
+        // увеличение кол-ва решённых выражений
+        currentExp++;
     }
 }

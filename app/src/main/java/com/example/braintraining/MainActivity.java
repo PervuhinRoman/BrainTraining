@@ -60,5 +60,4 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-// TODO: добавить таймер
 // TODO: сжать код обработки нажатия кнопок ans1 и т.д. Попробывать сохдать один onClickListener, т.к. различается 1 строчка
