@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Results extends AppCompatActivity {
 
     private static final String LOG_TAG = "ArraysState";
@@ -19,8 +22,10 @@ public class Results extends AppCompatActivity {
     TextView txtMistakes;
 
     int expressionsCount;
-    int mistakesCount;
     Double time = 0.0;
+
+    List<Integer> userAnswers = new ArrayList<>();              // массив пользовательских ответов
+    List<Integer> rightAnswers = new ArrayList<>();             // массив правильных ответов
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +43,14 @@ public class Results extends AppCompatActivity {
         Log.d(LOG_TAG, "Time from Training: " + time);
         txtTime.setText("Time: " + getTimerText(time));
 
-        // получение кол-ва ошибок
-        mistakesCount = intent.getIntExtra("mistakesCount", 10000);
-        txtMistakes.setText("Mistakes:" + Integer.toString(mistakesCount));
+        // получение пользовательских ответов
+        userAnswers = intent.getIntegerArrayListExtra("userAnswers");
+
+        // получение верных ответов
+        rightAnswers = intent.getIntegerArrayListExtra("rightAnswers");
+
+        // вывод кол-ва ошибок
+        txtMistakes.setText("Mistakes: " + Integer.toString(getMistakesCount()));
 
         btnGoHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +92,19 @@ public class Results extends AppCompatActivity {
     String formatTime(int seconds, int minutes) {
         return String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
     }
-}
 
-// TODO: реализовать подсчёт ошибок
+    //вычисление кол-ва ошибок
+    int getMistakesCount(){
+        int mistakesCount = 0;
+        for(int i = 0; i < userAnswers.size(); i++){
+            if(userAnswers.get(i) != rightAnswers.get(i)){
+                mistakesCount++;
+            }
+        }
+        return mistakesCount;
+    }
+
+    void generateTextViewFromArray(){
+
+    }
+}

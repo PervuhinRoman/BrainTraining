@@ -8,12 +8,14 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -39,8 +41,6 @@ public class Training extends AppCompatActivity {
 
     List<Integer> userAnswers = new ArrayList<>();              // массив пользовательских ответов
     List<Integer> rightAnswers = new ArrayList<>();             // массив правильных ответов
-
-    int mistakesCount = 0;                // кол-во ошибок пользователя
 
     int expressionsCount;                                        // кол-во выражений
     List<String> expressions = new ArrayList<>();                // массив выражений
@@ -244,16 +244,6 @@ public class Training extends AppCompatActivity {
             // остановка таймера
             timerTask.cancel();
 
-            //вычисление кол-ва ошибок
-            for(int i = 0; i < userAnswers.size(); i++){
-                if(userAnswers.get(i) != rightAnswers.get(i)){
-                    mistakesCount++;
-                }
-            }
-
-            // кол-во ошибок пользователя
-            Log.d(LOG_TAG, "Mistakes: " + mistakesCount);
-
             // создание intent-а для передачи данных между activity и открытия новых активностей
             Intent intent = new Intent(getApplicationContext(), Results.class);
 
@@ -263,8 +253,11 @@ public class Training extends AppCompatActivity {
             // передаём время выполнения в Results
             intent.putExtra("time", time);
 
-            // передаём кол-во ошибок в Results
-            intent.putExtra("mistakesCount", mistakesCount);
+            // передаём массив пользовательских ответов в Results
+            intent.putExtra("userAnswers", (Serializable) userAnswers);
+
+            // передаём массив правильных ответов в Results
+            intent.putExtra("rightAnswers", (Serializable) rightAnswers);
 
             // запускаем новую активность
             startActivity(intent);
