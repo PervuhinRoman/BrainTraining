@@ -16,8 +16,10 @@ public class Results extends AppCompatActivity {
     Button btnAgain;
     Button btnGoHome;
     TextView txtTime;
+    TextView txtMistakes;
 
     int expressionsCount;
+    int mistakesCount;
     Double time = 0.0;
 
     @Override
@@ -28,12 +30,17 @@ public class Results extends AppCompatActivity {
         btnAgain = (Button) findViewById(R.id.btnAgain);
         btnGoHome = (Button) findViewById(R.id.btnGoHome);
         txtTime = (TextView) findViewById(R.id.txtTimeResult);
+        txtMistakes = (TextView) findViewById(R.id.txtMistakes);
 
         // получение времени выполнения задания
-        Intent timeIntent = getIntent();
-        time = timeIntent.getDoubleExtra("time", 0.0);
+        Intent intent = getIntent();
+        time = intent.getDoubleExtra("time", 0.0);
         Log.d(LOG_TAG, "Time from Training: " + time);
         txtTime.setText("Time: " + getTimerText(time));
+
+        // получение кол-ва ошибок
+        mistakesCount = intent.getIntExtra("mistakesCount", 10000);
+        txtMistakes.setText("Mistakes:" + Integer.toString(mistakesCount));
 
         btnGoHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,8 +57,8 @@ public class Results extends AppCompatActivity {
                 // обнуление времени решения задания
                 time = 0.0;
                 // получение кол-ва выражений из предыдущей (Training) activity
-                Intent expressionsCountIntent = getIntent();
-                expressionsCount = expressionsCountIntent.getIntExtra("expressionsCount", 50);
+                //Intent expressionsCountIntent = getIntent();
+                expressionsCount = intent.getIntExtra("expressionsCount", 50);
                 Log.d(LOG_TAG, "Expressions count from Training: " + expressionsCount);
 
                 // передача кол-ва выражений в Training activity
@@ -76,3 +83,5 @@ public class Results extends AppCompatActivity {
         return String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
     }
 }
+
+// TODO: реализовать подсчёт ошибок

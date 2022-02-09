@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -38,6 +39,8 @@ public class Training extends AppCompatActivity {
 
     List<Integer> userAnswers = new ArrayList<>();              // массив пользовательских ответов
     List<Integer> rightAnswers = new ArrayList<>();             // массив правильных ответов
+
+    int mistakesCount = 0;                // кол-во ошибок пользователя
 
     int expressionsCount;                                        // кол-во выражений
     List<String> expressions = new ArrayList<>();                // массив выражений
@@ -232,8 +235,25 @@ public class Training extends AppCompatActivity {
 
     // метод выполняющейся при нажатии на один из вариантов ответа
     void optimize(Button ans){
+        // добавление пользовательского ответа в массив пользовательских ответов
+        userAnswers.add(Integer.parseInt(ans.getText().toString()));
+        Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers);
+
         // проверка кол-ва решённых выражений
         if(currentExp == expressionsCount - 1){
+            // остановка таймера
+            timerTask.cancel();
+
+            //вычисление кол-ва ошибок
+            for(int i = 0; i < userAnswers.size(); i++){
+                if(userAnswers.get(i) != rightAnswers.get(i)){
+                    mistakesCount++;
+                }
+            }
+
+            // кол-во ошибок пользователя
+            Log.d(LOG_TAG, "Mistakes: " + mistakesCount);
+
             // создание intent-а для передачи данных между activity и открытия новых активностей
             Intent intent = new Intent(getApplicationContext(), Results.class);
 
@@ -242,15 +262,13 @@ public class Training extends AppCompatActivity {
 
             // передаём время выполнения в Results
             intent.putExtra("time", time);
+
+            // передаём кол-во ошибок в Results
+            intent.putExtra("mistakesCount", mistakesCount);
+
+            // запускаем новую активность
             startActivity(intent);
-
-            // остановка таймера
-            timerTask.cancel();
         }
-
-        // добавление пользовательского ответа в массив пользовательских ответов
-        userAnswers.add(Integer.parseInt(ans.getText().toString()));
-        Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers);
 
         // генерация следующего выражения
         onButtonClick();
