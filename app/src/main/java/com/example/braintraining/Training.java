@@ -3,6 +3,7 @@ package com.example.braintraining;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
@@ -136,6 +137,7 @@ public class Training extends AppCompatActivity {
     }
 
     // основной метод генерации
+    @SuppressLint("SetTextI18n")
     public void onButtonClick(){
         // генерация и добавления первой случайной цифры в диапозоне: 1 - 9
         number = (int)(Math.random() * 9 + 1);
@@ -186,7 +188,7 @@ public class Training extends AppCompatActivity {
         rightAnswers.add(rightAnswer);
 
         // случайным образом присваиваем праильный ответ одной из конопок выбора ответа
-        // TODO: реализовать систему, исключающую возможность совпадения рандомного неправильного ответа с правильным
+
         number = (int)(Math.random() * 3 + 1);
         switch (number){
             case 1:
@@ -225,5 +227,3 @@ public class Training extends AppCompatActivity {
         rightAnswer = 0;
     }
 }
-
-// TODO: реализовать класс Results: вывод результатов, возврат к ActivityMain

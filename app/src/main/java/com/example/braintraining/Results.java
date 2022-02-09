@@ -1,7 +1,5 @@
 package com.example.braintraining;
 
-import static androidx.core.content.PackageManagerCompat.LOG_TAG;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;

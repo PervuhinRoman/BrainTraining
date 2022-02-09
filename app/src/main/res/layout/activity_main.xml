@@ -29,6 +29,7 @@
         android:layout_marginStart="10dp"/>
 
     <EditText
+        android:inputType="number"
         android:id="@+id/txtExpressionsCount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,11 +54,4 @@
         android:text="Apply"
         android:layout_weight="1"
         android:layout_margin="100dp"/>
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:text="Button" />
 </LinearLayout>
