@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ public class Results extends AppCompatActivity {
     Button btnGoHome;
     TextView txtTime;
     TextView txtMistakes;
+    LinearLayout arraysLinearLayout;
 
     int expressionsCount;
     Double time = 0.0;
@@ -36,6 +39,7 @@ public class Results extends AppCompatActivity {
         btnGoHome = (Button) findViewById(R.id.btnGoHome);
         txtTime = (TextView) findViewById(R.id.txtTimeResult);
         txtMistakes = (TextView) findViewById(R.id.txtMistakes);
+        arraysLinearLayout = (LinearLayout) findViewById(R.id.arraysLinearLayout);
 
         // получение времени выполнения задания
         Intent intent = getIntent();
@@ -50,7 +54,9 @@ public class Results extends AppCompatActivity {
         rightAnswers = intent.getIntegerArrayListExtra("rightAnswers");
 
         // вывод кол-ва ошибок
-        txtMistakes.setText("Mistakes: " + Integer.toString(getMistakesCount()));
+        txtMistakes.setText("Mistakes: " + Integer.toString(getMistakesCount()) + " / " + Integer.toString(rightAnswers.size()));
+
+        generateTextViewFromArray();
 
         btnGoHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +111,15 @@ public class Results extends AppCompatActivity {
     }
 
     void generateTextViewFromArray(){
+        for(int i = 0; i < userAnswers.size(); i++){
+            TextView item = new TextView(Results.this);
+            item.setText(Integer.toString(userAnswers.get(i)) + "   " + Integer.toString(rightAnswers.get(i)));
+            LinearLayout.LayoutParams imageViewLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            item.setGravity(Gravity.CENTER);
+            item.setTextSize(30);
+            item.setLayoutParams(imageViewLayoutParams);
 
+            arraysLinearLayout.addView(item);
+        }
     }
 }
