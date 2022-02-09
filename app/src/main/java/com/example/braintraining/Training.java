@@ -60,7 +60,7 @@ public class Training extends AppCompatActivity {
         // кол-во выражений, которые необходимо решить, полученное из MainActivity
         Intent expressionsCountIntent = getIntent();
         expressionsCount = expressionsCountIntent.getIntExtra("expressionsCount", 50);
-        Log.d(LOG_TAG, Integer.toString(expressionsCount));
+        Log.d(LOG_TAG, "Expressions count from MainActivity: " + expressionsCount);
 
         // создание "нулевого" выражения
         onButtonClick();
@@ -72,6 +72,7 @@ public class Training extends AppCompatActivity {
                 // проверка кол-ва решённых выражений
                 if(currentExp == expressionsCount - 1){
                     Intent intent = new Intent(getApplicationContext(), Results.class);
+                    intent.putExtra("expressionsCount", expressionsCount);
                     startActivity(intent);
                 }
 
@@ -94,6 +95,7 @@ public class Training extends AppCompatActivity {
                 // проверка кол-ва решённых выражений
                 if(currentExp == expressionsCount - 1){
                     Intent intent = new Intent(getApplicationContext(), Results.class);
+                    intent.putExtra("expressionsCount", expressionsCount);
                     startActivity(intent);
                 }
 
@@ -116,6 +118,7 @@ public class Training extends AppCompatActivity {
                 // проверка кол-ва решённых выражений
                 if(currentExp == expressionsCount - 1){
                     Intent intent = new Intent(getApplicationContext(), Results.class);
+                    intent.putExtra("expressionsCount", expressionsCount);
                     startActivity(intent);
                 }
 
