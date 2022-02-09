@@ -15,8 +15,10 @@ public class Results extends AppCompatActivity {
 
     Button btnAgain;
     Button btnGoHome;
+    TextView txtTime;
 
     int expressionsCount;
+    Double time = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +27,18 @@ public class Results extends AppCompatActivity {
 
         btnAgain = (Button) findViewById(R.id.btnAgain);
         btnGoHome = (Button) findViewById(R.id.btnGoHome);
+        txtTime = (TextView) findViewById(R.id.txtTimeResult);
+
+        // получение времени выполнения задания
+        Intent timeIntent = getIntent();
+        time = timeIntent.getDoubleExtra("time", 0.0);
+        Log.d(LOG_TAG, "Time from Training: " + time);
+        txtTime.setText("Time: " + getTimerText(time));
 
         btnGoHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                time = 0.0;
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
@@ -37,6 +47,8 @@ public class Results extends AppCompatActivity {
         btnAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // обнуление времени решения задания
+                time = 0.0;
                 // получение кол-ва выражений из предыдущей (Training) activity
                 Intent expressionsCountIntent = getIntent();
                 expressionsCount = expressionsCountIntent.getIntExtra("expressionsCount", 50);
@@ -48,5 +60,19 @@ public class Results extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    // получение времени
+    String getTimerText(Double time) {
+        int rounded = (int) Math.round(time);
+        int seconds = ((rounded % 86400) % 3600) % 60;
+        int minutes = ((rounded % 86400) % 3600) / 60;
+
+        return formatTime(seconds, minutes);
+    }
+
+    // форматирование вывода времени
+    String formatTime(int seconds, int minutes) {
+        return String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
     }
 }

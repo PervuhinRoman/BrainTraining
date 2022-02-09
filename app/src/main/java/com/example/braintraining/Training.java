@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Training extends AppCompatActivity {
 
@@ -25,6 +27,11 @@ public class Training extends AppCompatActivity {
     Button ans2;
     Button ans3;
     TextView txtQuestion;
+    TextView txtTimer;
+
+    Timer timer;
+    TimerTask timerTask;
+    Double time = 0.0;
 
     String question = "";             // выражение
     int rightAnswer = 0;              // правильный ответ
@@ -52,6 +59,11 @@ public class Training extends AppCompatActivity {
         ans2 = (Button) findViewById(R.id.button2);
         ans3 = (Button) findViewById(R.id.button3);
         txtQuestion = (TextView) findViewById(R.id.question);
+        txtTimer = (TextView) findViewById(R.id.txtTimer);
+
+        // создание таймера и его запуск
+        timer = new Timer();
+        startTimer();
 
         // получение ресурсов цветов
         Resources resources = getResources();
@@ -72,9 +84,18 @@ public class Training extends AppCompatActivity {
             public void onClick(View view) {
                 // проверка кол-ва решённых выражений
                 if(currentExp == expressionsCount - 1){
+                    // создание intent-а для передачи данных между activity и открытия новых активностей
                     Intent intent = new Intent(getApplicationContext(), Results.class);
+
+                    // передаём кол-во выражений в Results
                     intent.putExtra("expressionsCount", expressionsCount);
+
+                    // передаём время выполнения в Results
+                    intent.putExtra("time", time);
                     startActivity(intent);
+
+                    // остановка таймера
+                    timerTask.cancel();
                 }
 
                 // добавление пользовательского ответа в массив пользовательских ответов
@@ -95,9 +116,18 @@ public class Training extends AppCompatActivity {
             public void onClick(View view) {
                 // проверка кол-ва решённых выражений
                 if(currentExp == expressionsCount - 1){
+                    // создание intent-а для передачи данных между activity и открытия новых активностей
                     Intent intent = new Intent(getApplicationContext(), Results.class);
+
+                    // передаём кол-во выражений в Results
                     intent.putExtra("expressionsCount", expressionsCount);
+
+                    // передаём время выполнения в Results
+                    intent.putExtra("time", time);
                     startActivity(intent);
+
+                    // остановка таймера
+                    timerTask.cancel();
                 }
 
                 // добавление пользовательского ответа в массив пользовательских ответов
@@ -118,9 +148,18 @@ public class Training extends AppCompatActivity {
             public void onClick(View view) {
                 // проверка кол-ва решённых выражений
                 if(currentExp == expressionsCount - 1){
+                    // создание intent-а для передачи данных между activity и открытия новых активностей
                     Intent intent = new Intent(getApplicationContext(), Results.class);
+
+                    // передаём кол-во выражений в Results
                     intent.putExtra("expressionsCount", expressionsCount);
+
+                    // передаём время выполнения в Results
+                    intent.putExtra("time", time);
                     startActivity(intent);
+
+                    // остановка таймера
+                    timerTask.cancel();
                 }
 
                 // добавление пользовательского ответа в массив пользовательских ответов
@@ -225,5 +264,42 @@ public class Training extends AppCompatActivity {
 
         // обнуляем переменную правильного ответа
         rightAnswer = 0;
+    }
+
+    // метод запуска таймера
+    private void startTimer()
+    {
+        timerTask = new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                runOnUiThread(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        time++;
+                        txtTimer.setText(getTimerText());
+                    }
+                });
+            }
+
+        };
+        timer.scheduleAtFixedRate(timerTask, 0 ,1000);
+    }
+
+    // получение времени
+    String getTimerText() {
+        int rounded = (int) Math.round(time);
+        int seconds = ((rounded % 86400) % 3600) % 60;
+        int minutes = ((rounded % 86400) % 3600) / 60;
+
+        return formatTime(seconds, minutes);
+    }
+
+    // форматирование вывода времени
+    String formatTime(int seconds, int minutes) {
+        return String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
     }
 }
