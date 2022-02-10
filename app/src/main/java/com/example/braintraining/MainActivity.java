@@ -1,17 +1,14 @@
 package com.example.braintraining;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -29,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // изменение заголовка активности так, чтобы не изменилось название приложения в лаунчере
+        setTitle("Parameters");
+
         btnApply = (Button) findViewById(R.id.btnApply);
         expressionsCount = (SeekBar) findViewById(R.id.seekBar);
         txtExpressionsCount = (TextView) findViewById(R.id.txtExpressionsCount);
@@ -36,9 +36,15 @@ public class MainActivity extends AppCompatActivity {
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Training.class);
-                intent.putExtra("expressionsCount", String.valueOf(txtExpressionsCount.getText()));
-                startActivity(intent);
+                try {
+                    Intent intent = new Intent(getApplicationContext(), Training.class);
+                    intent.putExtra("expressionsCount", Integer.parseInt(txtExpressionsCount.getText().toString()));
+                    startActivity(intent);
+                } catch (NumberFormatException e){
+                    // обработка исключения: пустая строка кол-ва выражений
+                    Toast nfeToast = Toast.makeText(getApplicationContext(), "Enter the expressions count", Toast.LENGTH_SHORT);
+                    nfeToast.show();
+                }
             }
         });
 
@@ -56,3 +62,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
+
+/*
+*  TODO: разработать дизайн
+*  TODO: навести "марофет"
+*  TODO: прочитать что такое lambda и почему studio предлагает заменить анонимные классы при установки onClickListener на lambda-выражение
+*/

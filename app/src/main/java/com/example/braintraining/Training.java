@@ -3,19 +3,24 @@ package com.example.braintraining;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Training extends AppCompatActivity {
 
@@ -25,20 +30,27 @@ public class Training extends AppCompatActivity {
     Button ans2;
     Button ans3;
     TextView txtQuestion;
+    TextView txtTimer;
+
+    Timer timer;
+    TimerTask timerTask;
+    Double time = 0.0;
 
     String question = "";             // выражение
     int rightAnswer = 0;              // правильный ответ
 
-    List<Integer> userAnswers = new ArrayList<Integer>();              // массив пользовательских ответов
-    List<Integer> rightAnswers = new ArrayList<Integer>();             // массив правильных ответов
+    List<Integer> userAnswers = new ArrayList<>();              // массив пользовательских ответов
+    List<Integer> rightAnswers = new ArrayList<>();             // массив правильных ответов
 
-    int expressionsCount;
-    List<String> expressions = new ArrayList<String>();                // массив выражений
+    int expressionsCount;                                        // кол-во выражений
+    List<String> expressions = new ArrayList<>();                // массив выражений
 
     String[] actions = {"+", "-"};    // список действий
 
     int number;                       // элемент цифры для выражения
     String action;                    // элемент действия для выражения
+
+    int currentExp = 0;               // кол-во решённых выражений
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -50,51 +62,46 @@ public class Training extends AppCompatActivity {
         ans2 = (Button) findViewById(R.id.button2);
         ans3 = (Button) findViewById(R.id.button3);
         txtQuestion = (TextView) findViewById(R.id.question);
+        txtTimer = (TextView) findViewById(R.id.txtTimer);
 
-        Resources resources = getResources();
-        int okColor = resources.getColor(R.color.okColor,  null);
-        int noColor = resources.getColor(R.color.noColor,  null);
+        // создание таймера и его запуск
+        timer = new Timer();
+        startTimer();
 
-        // создание нулевого выражения
-        onButtonClick();
-
-        // кол-во выражений, которые необходимо создать, полученное из MainActivity
+        // кол-во выражений, которые необходимо решить, полученное из MainActivity
         Intent expressionsCountIntent = getIntent();
         expressionsCount = expressionsCountIntent.getIntExtra("expressionsCount", 50);
-        Log.d(LOG_TAG, Integer.toString(expressionsCount));
+        Log.d(LOG_TAG, "Expressions count from MainActivity: " + expressionsCount);
 
-        // обработка нажатия на вариант ответа #1
-        ans1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                userAnswers.add(Integer.parseInt(ans1.getText().toString()));
-                Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers);
-                onButtonClick();
-            }
-        });
+        // создание "нулевого" выражения
+        onButtonClick();
 
-        // обработка нажатия на вариант ответа #2
-        ans2.setOnClickListener(new View.OnClickListener() {
+        // общий listener для кнопок
+        View.OnClickListener buttonsClickListener = new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-                userAnswers.add(Integer.parseInt(ans2.getText().toString()));
-                Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers);
-                onButtonClick();
+            public void onClick(View v) {
+                switch (v.getId()){
+                    case R.id.button1:
+                        optimize(ans1);
+                        break;
+                    case R.id.button2:
+                        optimize(ans2);
+                        break;
+                    case R.id.button3:
+                        optimize(ans3);
+                        break;
+                }
             }
-        });
+        };
 
-        // обработка нажатия на вариант ответа #3
-        ans3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                userAnswers.add(Integer.parseInt(ans3.getText().toString()));
-                Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers);
-                onButtonClick();
-            }
-        });
+        // обработка нажатий на варианты ответов
+        ans1.setOnClickListener(buttonsClickListener);
+        ans2.setOnClickListener(buttonsClickListener);
+        ans3.setOnClickListener(buttonsClickListener);
     }
 
-    // основной метод
+    // основной метод генерации
+    @SuppressLint("SetTextI18n")
     public void onButtonClick(){
         // генерация и добавления первой случайной цифры в диапозоне: 1 - 9
         number = (int)(Math.random() * 9 + 1);
@@ -137,6 +144,7 @@ public class Training extends AppCompatActivity {
         }
 
         // готовое выражение
+        expressions.add(question);
         txtQuestion.setText(question);
         question = "";
 
@@ -144,7 +152,7 @@ public class Training extends AppCompatActivity {
         rightAnswers.add(rightAnswer);
 
         // случайным образом присваиваем праильный ответ одной из конопок выбора ответа
-        // TODO: реализовать систему, исключающую возможность совпадения рандомного неправильного ответа с правильным
+
         number = (int)(Math.random() * 3 + 1);
         switch (number){
             case 1:
@@ -182,6 +190,78 @@ public class Training extends AppCompatActivity {
         // обнуляем переменную правильного ответа
         rightAnswer = 0;
     }
-}
 
-// TODO: установить ограгичение по кол-ву выражений
+    // метод запуска таймера
+    private void startTimer()
+    {
+        timerTask = new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                runOnUiThread(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        time++;
+                        txtTimer.setText(getTimerText());
+                    }
+                });
+            }
+
+        };
+        timer.scheduleAtFixedRate(timerTask, 0 ,1000);
+    }
+
+    // получение времени
+    String getTimerText() {
+        int rounded = (int) Math.round(time);
+        int seconds = ((rounded % 86400) % 3600) % 60;
+        int minutes = ((rounded % 86400) % 3600) / 60;
+
+        return formatTime(seconds, minutes);
+    }
+
+    // форматирование вывода времени
+    String formatTime(int seconds, int minutes) {
+        return String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
+    }
+
+    // метод выполняющейся при нажатии на один из вариантов ответа
+    void optimize(Button ans){
+        // добавление пользовательского ответа в массив пользовательских ответов
+        userAnswers.add(Integer.parseInt(ans.getText().toString()));
+        Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers);
+
+        // проверка кол-ва решённых выражений
+        if(currentExp == expressionsCount - 1){
+            // остановка таймера
+            timerTask.cancel();
+
+            // создание intent-а для передачи данных между activity и открытия новых активностей
+            Intent intent = new Intent(getApplicationContext(), Results.class);
+
+            // передаём кол-во выражений в Results
+            intent.putExtra("expressionsCount", expressionsCount);
+
+            // передаём время выполнения в Results
+            intent.putExtra("time", time);
+
+            // передаём массив пользовательских ответов в Results
+            intent.putExtra("userAnswers", (Serializable) userAnswers);
+
+            // передаём массив правильных ответов в Results
+            intent.putExtra("rightAnswers", (Serializable) rightAnswers);
+
+            // запускаем новую активность
+            startActivity(intent);
+        }
+
+        // генерация следующего выражения
+        onButtonClick();
+
+        // увеличение кол-ва решённых выражений
+        currentExp++;
+    }
+}
