@@ -26,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // изменение заголовка активности так, чтобы не изменилось название приложения в лаунчере
+        setTitle("Parameters");
+
         btnApply = (Button) findViewById(R.id.btnApply);
         expressionsCount = (SeekBar) findViewById(R.id.seekBar);
         txtExpressionsCount = (TextView) findViewById(R.id.txtExpressionsCount);

@@ -7,19 +7,8 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-
     <TextView
-        android:id="@+id/mainText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Parameters"
-        android:textSize="30sp"
-        android:gravity="center"
-        android:layout_weight="0"
-        android:layout_marginBottom="50dp"
-        android:layout_marginTop="50dp"/>
-
-    <TextView
+        android:layout_marginTop="20dp"
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
