@@ -27,7 +27,7 @@ public class Results extends AppCompatActivity {
     LinearLayout rightAnswersArrayLinearLayout;
     LinearLayout userAnswersArrayLinearLayout;
 
-    int expressionsCount;
+    int expressionsCount = 0;
     Double time = 0.0;
 
     List<Integer> userAnswers = new ArrayList<>();              // массив пользовательских ответов
@@ -59,10 +59,10 @@ public class Results extends AppCompatActivity {
         // получение верных ответов
         rightAnswers = intent.getIntegerArrayListExtra("rightAnswers");
 
-        // вывод кол-ва ошибок
-        txtMistakes.setText("Mistakes: " + Integer.toString(getMistakesCount()) + " / " + Integer.toString(rightAnswers.size()));
-
         generateTextViewFromArray();
+
+        // вывод кол-ва ошибок
+        txtMistakes.setText("Mistakes: " + Integer.toString(expressionsCount) + " / " + Integer.toString(rightAnswers.size()));
 
         btnGoHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,17 +105,6 @@ public class Results extends AppCompatActivity {
         return String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
     }
 
-    //вычисление кол-ва ошибок
-    int getMistakesCount(){
-        int mistakesCount = 0;
-        for(int i = 0; i < userAnswers.size(); i++){
-            if(userAnswers.get(i) != rightAnswers.get(i)){
-                mistakesCount++;
-            }
-        }
-        return mistakesCount;
-    }
-
     void generateTextViewFromArray(){
         for(int i = 0; i < userAnswers.size(); i++){
             // натройка оформления вывода правильного ответа
@@ -132,9 +121,12 @@ public class Results extends AppCompatActivity {
 
             // установка цвета ответа
             if(Integer.toString(rightAnswers.get(i)) == Integer.toString(userAnswers.get(i))){
-                userItem.setBackgroundResource(R.color.noColor);
-            } else {
                 userItem.setBackgroundResource(R.color.okColor);
+            } else {
+                userItem.setBackgroundResource(R.color.noColor);
+
+                // подсчёт кол-ва ошибок
+                expressionsCount++;
             }
 
             userItem.setGravity(Gravity.CENTER);
