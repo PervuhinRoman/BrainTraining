@@ -50,11 +50,45 @@
         app:layout_constraintTop_toBottomOf="@+id/txtMistakes">
 
         <LinearLayout
-            android:id="@+id/arraysLinearLayout"
+            android:id="@+id/columns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/userAnswersArrayLinearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/userAnswersHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Your answers: "
+                    android:textSize="20sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/rightAnswersArrayLinearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/rightAnswersHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Right answers: "
+                    android:textSize="20sp"
+                    android:gravity="center"/>
+            </LinearLayout>
         </LinearLayout>
+
+
     </ScrollView>
 
     <LinearLayout

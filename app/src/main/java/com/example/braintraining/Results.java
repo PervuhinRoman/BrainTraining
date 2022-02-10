@@ -22,7 +22,10 @@ public class Results extends AppCompatActivity {
     Button btnGoHome;
     TextView txtTime;
     TextView txtMistakes;
-    LinearLayout arraysLinearLayout;
+    TextView rightAnswersHeader;
+    TextView userAnswersHeader;
+    LinearLayout rightAnswersArrayLinearLayout;
+    LinearLayout userAnswersArrayLinearLayout;
 
     int expressionsCount;
     Double time = 0.0;
@@ -39,7 +42,10 @@ public class Results extends AppCompatActivity {
         btnGoHome = (Button) findViewById(R.id.btnGoHome);
         txtTime = (TextView) findViewById(R.id.txtTimeResult);
         txtMistakes = (TextView) findViewById(R.id.txtMistakes);
-        arraysLinearLayout = (LinearLayout) findViewById(R.id.arraysLinearLayout);
+        rightAnswersHeader = (TextView) findViewById(R.id.rightAnswersHeader);
+        userAnswersHeader = (TextView) findViewById(R.id.userAnswersHeader);
+        rightAnswersArrayLinearLayout = (LinearLayout) findViewById(R.id.rightAnswersArrayLinearLayout);
+        userAnswersArrayLinearLayout = (LinearLayout) findViewById(R.id.userAnswersArrayLinearLayout);
 
         // получение времени выполнения задания
         Intent intent = getIntent();
@@ -112,14 +118,36 @@ public class Results extends AppCompatActivity {
 
     void generateTextViewFromArray(){
         for(int i = 0; i < userAnswers.size(); i++){
-            TextView item = new TextView(Results.this);
-            item.setText(Integer.toString(userAnswers.get(i)) + "   " + Integer.toString(rightAnswers.get(i)));
-            LinearLayout.LayoutParams imageViewLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            item.setGravity(Gravity.CENTER);
-            item.setTextSize(30);
-            item.setLayoutParams(imageViewLayoutParams);
+            // натройка оформления вывода правильного ответа
+            TextView rightItem = new TextView(Results.this);
+            LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            rightItem.setBackgroundResource(R.color.okColor);
+            rightItem.setGravity(Gravity.CENTER);
+            rightItem.setTextSize(20);
+            textViewLayoutParams.setMargins(10, 10, 10, 10);
+            rightItem.setLayoutParams(textViewLayoutParams);
 
-            arraysLinearLayout.addView(item);
+            // натройка оформления вывода пользовательского ответа
+            TextView userItem = new TextView(Results.this);
+
+            // установка цвета ответа
+            if(Integer.toString(rightAnswers.get(i)) == Integer.toString(userAnswers.get(i))){
+                userItem.setBackgroundResource(R.color.noColor);
+            } else {
+                userItem.setBackgroundResource(R.color.okColor);
+            }
+
+            userItem.setGravity(Gravity.CENTER);
+            userItem.setTextSize(20);
+            userItem.setLayoutParams(textViewLayoutParams);
+
+            // вывод текущего верного ответа
+            rightItem.setText(Integer.toString(rightAnswers.get(i)));
+            rightAnswersArrayLinearLayout.addView(rightItem);
+
+            // вывод текущего пользовательського ответа
+            userItem.setText(Integer.toString(userAnswers.get(i)));
+            userAnswersArrayLinearLayout.addView(userItem);
         }
     }
 }
