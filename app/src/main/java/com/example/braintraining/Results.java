@@ -64,6 +64,7 @@ public class Results extends AppCompatActivity {
         // вывод кол-ва ошибок
         txtMistakes.setText("Mistakes: " + Integer.toString(expressionsCount) + " / " + Integer.toString(rightAnswers.size()));
 
+        // обрабока нажатия на кнопку Home
         btnGoHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,6 +74,7 @@ public class Results extends AppCompatActivity {
             }
         });
 
+        // обработка нажатия на кнопку Again
         btnAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

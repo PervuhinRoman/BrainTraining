@@ -68,11 +68,6 @@ public class Training extends AppCompatActivity {
         timer = new Timer();
         startTimer();
 
-        // получение ресурсов цветов
-        Resources resources = getResources();
-        int okColor = resources.getColor(R.color.okColor,  null);
-        int noColor = resources.getColor(R.color.noColor,  null);
-
         // кол-во выражений, которые необходимо решить, полученное из MainActivity
         Intent expressionsCountIntent = getIntent();
         expressionsCount = expressionsCountIntent.getIntExtra("expressionsCount", 50);

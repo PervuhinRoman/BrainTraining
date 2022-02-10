@@ -40,6 +40,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTimeResult" />
 
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/headers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtMistakes">
+
+        <TextView
+            android:id="@+id/userAnswersHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your answers: "
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/rightAnswersHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Right answers: "
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -47,7 +78,7 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtMistakes">
+        app:layout_constraintTop_toBottomOf="@+id/headers">
 
         <LinearLayout
             android:id="@+id/columns"
@@ -61,14 +92,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/userAnswersHeader"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Your answers: "
-                    android:textSize="20sp"
-                    android:gravity="center"/>
             </LinearLayout>
 
             <LinearLayout
@@ -77,14 +100,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/rightAnswersHeader"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Right answers: "
-                    android:textSize="20sp"
-                    android:gravity="center"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -114,7 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:text="Home" />
+            android:text="Home " />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
