@@ -89,6 +89,8 @@ number = (int)(Math.random() * 20 - 20);
 ```Xml
 <EditText android:inputType="number" />
 ```
+<img src="https://github.com/PervuhinRoman/Images/blob/master/NumberKeyboardScreenshot.jpg" width="180px" height="307px" />
+
 ### Работа с всплывающими уведомлениями `Toast`
 ```Java
 // Создать уведомления в нижней части экрана: Toast <ИМЯ> = Toast.makeText(<ТЕКУЩИЙ КОНТЕКСТ>, "<СООБЩЕНИЕ>", Toast.<ПРОДОЛЖИТЕЛЬНОСТЬ_ПОКАЗА_В_ВИДЕ_КОНСТАНТЫ>);
@@ -146,8 +148,12 @@ String getTimerText() {
 String formatTime(int seconds, int minutes) {
     return String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
 }
+
+// остановка таймера
+timerTask.cancel();
+timer = 0.0;
 ```
-### Форматирование строк для отображения таймера `String.format("%02d"...)`
+### Форматирование строк для отображения таймера `String.format("%02d"..)`
 ```Java
 // форматирование вывода времени
 String formatTime(int seconds, int minutes) {
@@ -166,7 +172,7 @@ runOnUiThread(new Runnable()
     }
 });
 ```
-### новый способ реализации `onClickListener` т.е. один listener для нескольких кнопок
+### Новый способ реализации `onClickListener` т.е. один listener для нескольких кнопок
 Т.к. действия, которые необходимо было выполнять с тремя разными кнопками отличались одной строчкой, удобнее всего было реализовать обработку нажатий следующим образом:
 ```Java
 // общий listener для кнопок
@@ -196,7 +202,7 @@ ans3.setOnClickListener(buttonsClickListener);
 ```
 ### Работа с `ConstraintLayout`
 [Файл разметки одной из activity](https://github.com/PervuhinRoman/BrainTraining/blob/master/app/src/main/res/layout/activity_results.xml)
-### работа с `ScrollView`
+### Работа с `ScrollView`
 [Файл разметки одной из activity](https://github.com/PervuhinRoman/BrainTraining/blob/master/app/src/main/res/layout/activity_results.xml)
 ### Работа с ресурсами в Java коде
 Например устанвка цвета фона для текстового элемента `rightItem`:
@@ -205,7 +211,7 @@ ans3.setOnClickListener(buttonsClickListener);
 
 rightItem.setBackgroundResource(R.color.okColor);
 ```
-### динамическое создание UI элементов (TextView) и установка парметров разметки из Java кода
+### Динамическое создание UI элементов (TextView) и установка парметров разметки из Java кода
 ```Java
 // создание нового текстового элемента в () контекст из которого будет создан элемент
 TextView rightItem = new TextView(Results.this);
