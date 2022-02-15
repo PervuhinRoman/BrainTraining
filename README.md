@@ -1,33 +1,36 @@
 # BrainTraining
 
 ### Содержание:
-* Передача данных между активностями
-* Переключение между активностями
-* Работа с seekBar
-* работа с динамическими массивами
-* работа с модулем random()
-* работа с `<EditText android:inputType="number" />`, чтобы исключить введение букв
-* работа с всплывающими уведомлениями `Toast`
-* работа с классом `Timer`
-* форматирование строк для отображения таймера `String.format("%02d"...)`
-* Работа с `runOnUiThread`
-* новый способ реализации `onClickListener` т.е. один listener для нескольких кнопок
-* работа с `ConstraintLayout`
-* работа с `ScrollView`
-* работа с ресурсами в Java коде
-* динамическое создание UI элементов (TextView) и установка парметров разметки из Java кода
-* изменение заголовка главной активности так, чтобы не изменилось название приложения в лаунчере `setTitle("Parameters");`
+* [Передача данных между активностями](#1)
+* [Переключение между активностями](#2)
+* [Работа с seekBar](#3)
+* [Работа с динамическими массивами](#4)
+* [Работа с модулем random()](#5)
+* [Работа с `<EditText android:inputType="number" />`, чтобы исключить введение букв](#6)
+* [Работа с всплывающими уведомлениями `Toast`](#7)
+* [Работа с классом `Timer`](#8)
+* [Форматирование строк для отображения таймера `String.format("%02d"...)`](#9)
+* [Работа с `runOnUiThread`](#10)
+* [Новый способ реализации `onClickListener` т.е. один listener для нескольких кнопок](#11)
+* [Работа с `ConstraintLayout`](#12)
+* [Работа с `ScrollView`](#13)
+* [Работа с ресурсами в Java коде](#14)
+* [Динамическое создание UI элементов (TextView) и установка парметров разметки из Java кода](#15)
+* [Изменение заголовка главной активности так, чтобы не изменилось название приложения в лаунчере `setTitle("Parameters");`](#16)
 
 ---
 
-### Переключение между активностями
+<a name="1"></a>
+## Переключение между активностями
 ```Java
 // Intent <INTENT_NAME> = new Intent(<ТЕКУЩИЙ КОНТЕКСТ>, <ИМЯ_КЛАССА_АКТИВНОСТИ_НА_КОТОРУЮ_ХОТИМ_ПЕРЕКЛЮЧИТЬСЯ>.class);
 
 Intent intent = new Intent(getApplicationContext(), Training.class);
 startActivity(intent);
 ```
-### Передача данных между активностями
+
+<a name="2"></a>
+## Передача данных между активностями
 * Отправка данных
 ```Java
 // создать Intent
@@ -44,7 +47,9 @@ intent.putExtra("expressionsCount", expressionsCount);
 Intent getingIntent = getIntent();
 int var = getingIntent.getIntExtra("expressionsCount", 50);
 ```
-### Работа с seekBar
+
+<a name="3"></a>
+## Работа с seekBar
 ```Java
 // всё также как с обычной кнопкой, но обязательно нужно прописать реализацию 3-х методов, даже если они остануться пустыми
 // переменная progress по дефолту равна 100. Т.е. весть SeekBar делится на 100 частей, что логично :)
@@ -64,7 +69,9 @@ expressionsCount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(
     public void onStopTrackingTouch(SeekBar seekBar) { } 
 });
 ```
-### Работа с динамическими массивами
+
+<a name="4"></a>
+## Работа с динамическими массивами
 ```Java
 // https://javarush.ru/groups/posts/dinamicheskie-massivy-java
 
@@ -77,7 +84,9 @@ rightAnswers.add(111);
 // получение элемента .get(<INDEX>)
 rightAnswers.get(1);
 ```
-### Работа с методом random() класса Math
+
+<a name="5"></a>
+## Работа с методом random() класса Math
 ```Java
 // данная функция генерирует рандомное число в диапозоне от 1 до 9
 number = (int)(Math.random() * 9 + 1);
@@ -85,13 +94,16 @@ number = (int)(Math.random() * 9 + 1);
 // данная функция генерирует рандомное число в диапозоне от -20 до 20
 number = (int)(Math.random() * 20 - 20);
 ```
-### Работа с изменением клавиатуры пользователя
+
+<a name="6"></a>
+## Работа с изменением клавиатуры пользователя
 ```Xml
 <EditText android:inputType="number" />
 ```
 <img src="https://github.com/PervuhinRoman/Images/blob/master/NumberKeyboardScreenshot.jpg" width="180px" height="307px" />
 
-### Работа с всплывающими уведомлениями `Toast`
+<a name="7"></a>
+## Работа с всплывающими уведомлениями `Toast`
 ```Java
 // Создать уведомления в нижней части экрана: Toast <ИМЯ> = Toast.makeText(<ТЕКУЩИЙ КОНТЕКСТ>, "<СООБЩЕНИЕ>", Toast.<ПРОДОЛЖИТЕЛЬНОСТЬ_ПОКАЗА_В_ВИДЕ_КОНСТАНТЫ>);
 // Отобразить уведомление: <ИМЯ>.show();
@@ -99,7 +111,9 @@ number = (int)(Math.random() * 20 - 20);
 Toast nfeToast = Toast.makeText(getApplicationContext(), "Enter the expressions count", Toast.LENGTH_SHORT);
 nfeToast.show();
 ```
-### Работа с классом `Timer`
+
+<a name="8"></a>
+## Работа с классом `Timer`
 ```Java
 Timer timer;
 TimerTask timerTask;
@@ -153,14 +167,18 @@ String formatTime(int seconds, int minutes) {
 timerTask.cancel();
 timer = 0.0;
 ```
-### Форматирование строк для отображения таймера `String.format("%02d"..)`
+
+<a name="9"></a>
+## Форматирование строк для отображения таймера `String.format("%02d"..)`
 ```Java
 // форматирование вывода времени
 String formatTime(int seconds, int minutes) {
     return String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
 }
 ```
-### Работа с `runOnUiThread`
+
+<a name="10"></a>
+## Работа с `runOnUiThread`
 ```Java
 runOnUiThread(new Runnable()
 {
@@ -172,7 +190,9 @@ runOnUiThread(new Runnable()
     }
 });
 ```
-### Новый способ реализации `onClickListener` т.е. один listener для нескольких кнопок
+
+<a name="11"></a>
+## Новый способ реализации `onClickListener` т.е. один listener для нескольких кнопок
 Т.к. действия, которые необходимо было выполнять с тремя разными кнопками отличались одной строчкой, удобнее всего было реализовать обработку нажатий следующим образом:
 ```Java
 // общий listener для кнопок
@@ -200,18 +220,26 @@ ans1.setOnClickListener(buttonsClickListener);
 ans2.setOnClickListener(buttonsClickListener);
 ans3.setOnClickListener(buttonsClickListener);
 ```
-### Работа с `ConstraintLayout`
+
+<a name="12"></a>
+## Работа с `ConstraintLayout`
 [Файл разметки одной из activity](https://github.com/PervuhinRoman/BrainTraining/blob/master/app/src/main/res/layout/activity_results.xml)
-### Работа с `ScrollView`
+
+<a name="13"></a>
+## Работа с `ScrollView`
 [Файл разметки одной из activity](https://github.com/PervuhinRoman/BrainTraining/blob/master/app/src/main/res/layout/activity_results.xml)
-### Работа с ресурсами в Java коде
+
+<a name="14"></a>
+## Работа с ресурсами в Java коде
 Например устанвка цвета фона для текстового элемента `rightItem`:
 ```Java
 // через R.java можно обращаться к любым ресурсам приложения
 
 rightItem.setBackgroundResource(R.color.okColor);
 ```
-### Динамическое создание UI элементов (TextView) и установка парметров разметки из Java кода
+
+<a name="15"></a>
+## Динамическое создание UI элементов (TextView) и установка парметров разметки из Java кода
 ```Java
 // создание нового текстового элемента в () контекст из которого будет создан элемент
 TextView rightItem = new TextView(Results.this);
@@ -230,7 +258,9 @@ rightItem.setLayoutParams(textViewLayoutParams);
 // добавление параметра == `android:layout_margin="10dp"`
 textViewLayoutParams.setMargins(10, 10, 10, 10);
 ```
-### Изменение заголовка главной активности так, чтобы не изменилось название приложения в лаунчере `setTitle("Parameters");`
+
+<a name="16"></a>
+## Изменение заголовка главной активности так, чтобы не изменилось название приложения в лаунчере `setTitle("Parameters");`
 ```Java
 super.onCreate(savedInstanceState);
 setContentView(R.layout.activity_main);
