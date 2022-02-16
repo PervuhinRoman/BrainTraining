@@ -1,11 +1,17 @@
 # BrainTraining
+*BraingTraining - приложение снованное на японской системе развития интеллекта и памяти за авторстовом [Рюты Кавашимы](https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B2%D0%B0%D1%81%D0%B8%D0%BC%D0%B0,_%D0%A0%D1%8E%D1%82%D0%B0) с незначительными изменениеями.*
 
-### Содержание:
+<br/>
+Ниже приведены полезные "моменты" в коде приложения, которые можно использовать в будущем
+<br/>
+<br/>
+
+## Содержание:
 * [Передача данных между активностями](#1)
 * [Переключение между активностями](#2)
 * [Работа с seekBar](#3)
 * [Работа с динамическими массивами](#4)
-* [Работа с модулем random()](#5)
+* [Работа с методом random() класса Math](#5)
 * [Работа с `<EditText android:inputType="number" />`, чтобы исключить введение букв](#6)
 * [Работа с всплывающими уведомлениями `Toast`](#7)
 * [Работа с классом `Timer`](#8)
@@ -15,12 +21,10 @@
 * [Работа с `ConstraintLayout`](#12)
 * [Работа с `ScrollView`](#13)
 * [Работа с ресурсами в Java коде](#14)
-* [Динамическое создание UI элементов (TextView) и установка парметров разметки из Java кода](#15)
+* [Динамическое создание UI элементов и установка парметров разметки из Java кода](#15)
 * [Изменение заголовка главной активности так, чтобы не изменилось название приложения в лаунчере `setTitle("Parameters");`](#16)
-
 ---
-
-<a name="1"></a>
+<a name="2"></a>
 ## Переключение между активностями
 ```Java
 // Intent <INTENT_NAME> = new Intent(<ТЕКУЩИЙ КОНТЕКСТ>, <ИМЯ_КЛАССА_АКТИВНОСТИ_НА_КОТОРУЮ_ХОТИМ_ПЕРЕКЛЮЧИТЬСЯ>.class);
@@ -29,7 +33,7 @@ Intent intent = new Intent(getApplicationContext(), Training.class);
 startActivity(intent);
 ```
 
-<a name="2"></a>
+<a name="1"></a>
 ## Передача данных между активностями
 * Отправка данных
 ```Java
@@ -234,20 +238,31 @@ ans3.setOnClickListener(buttonsClickListener);
 Например устанвка цвета фона для текстового элемента `rightItem`:
 ```Java
 // через R.java можно обращаться к любым ресурсам приложения
+TextView rightItem = new TextView(Results.this);
 
 rightItem.setBackgroundResource(R.color.okColor);
+
+// присвоение переменной типа int значение цвета
+// первый вариант
+int color = Сolor.GREEN;
+
+// второй вариант
+int color = getResources().getColor(R.color.grass);
+
+// третий вариант
+color = Color.argb(0,0,255,0);
 ```
 
 <a name="15"></a>
 ## Динамическое создание UI элементов (TextView) и установка парметров разметки из Java кода
 ```Java
-// создание нового текстового элемента в () контекст из которого будет создан элемент
+// создание нового текстового элемента. В () контекст из которого будет создан элемент
 TextView rightItem = new TextView(Results.this);
 
-// создание параметров layout-настроек т.е. то же самое, что в `xml` выглядит как `android:layout_params="..."`
+// создание параметров layout-настроек т.е. то же самое, что в xml выглядит как android:layout_params="..."
 LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-// настройка параметров конкретного элемента т.е. то же самое, что, например, `android:gravity="center"`
+// настройка параметров конкретного элемента т.е. то же самое, что, например, android:gravity="center"
 rightItem.setBackgroundResource(R.color.okColor);
 rightItem.setGravity(Gravity.CENTER);
 rightItem.setTextSize(20);
@@ -255,7 +270,7 @@ rightItem.setTextSize(20);
 // установка созданных параметров layout-настроек
 rightItem.setLayoutParams(textViewLayoutParams);
 
-// добавление параметра == `android:layout_margin="10dp"`
+// добавление параметра == android:layout_margin="10dp"
 textViewLayoutParams.setMargins(10, 10, 10, 10);
 ```
 
