@@ -51,6 +51,8 @@ intent.putExtra("expressionsCount", expressionsCount);
 Intent getingIntent = getIntent();
 int var = getingIntent.getIntExtra("expressionsCount", 50);
 ```
+Наглядное представление какие данные куда передаются:
+<img src="https://github.com/PervuhinRoman/Images/blob/master/BrainTrainingInfoGraphics.png"/>
 
 <a name="3"></a>
 ## Работа с seekBar
