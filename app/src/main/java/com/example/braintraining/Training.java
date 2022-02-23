@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +15,6 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -58,9 +55,9 @@ public class Training extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training);
 
-        ans1 = (Button) findViewById(R.id.button1);
-        ans2 = (Button) findViewById(R.id.button2);
-        ans3 = (Button) findViewById(R.id.button3);
+        ans1 = findViewById(R.id.button1);
+        ans2 = findViewById(R.id.button2);
+        ans3 = findViewById(R.id.button3);
         txtQuestion = (TextView) findViewById(R.id.question);
         txtTimer = (TextView) findViewById(R.id.txtTimer);
 

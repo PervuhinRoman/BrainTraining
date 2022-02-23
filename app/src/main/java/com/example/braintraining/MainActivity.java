@@ -10,11 +10,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
 
     Button btnApply;
@@ -29,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
         // изменение заголовка активности так, чтобы не изменилось название приложения в лаунчере
         setTitle("Parameters");
 
-        btnApply = (Button) findViewById(R.id.btnApply);
-        expressionsCount = (SeekBar) findViewById(R.id.seekBar);
-        txtExpressionsCount = (TextView) findViewById(R.id.txtExpressionsCount);
+        btnApply = findViewById(R.id.btnApply);
+        expressionsCount = findViewById(R.id.seekBar);
+        txtExpressionsCount = findViewById(R.id.txtExpressionsCount);
 
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
