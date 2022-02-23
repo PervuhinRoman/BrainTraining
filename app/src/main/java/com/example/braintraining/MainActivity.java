@@ -66,5 +66,4 @@ public class MainActivity extends AppCompatActivity {
 /*
 *  TODO: разработать дизайн
 *  TODO: навести "марофет"
-*  TODO: прочитать что такое lambda и почему studio предлагает заменить анонимные классы при установки onClickListener на lambda-выражение
 */
