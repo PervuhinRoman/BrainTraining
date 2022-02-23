@@ -64,6 +64,5 @@ public class MainActivity extends AppCompatActivity {
 }
 
 /*
-*  TODO: разработать дизайн
 *  TODO: навести "марофет"
 */
