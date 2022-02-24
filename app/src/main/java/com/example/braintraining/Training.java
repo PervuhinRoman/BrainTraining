@@ -27,7 +27,7 @@ public class Training extends AppCompatActivity {
     Button ans2;
     Button ans3;
     TextView txtQuestion;
-    TextView txtTimer;
+    TextView tittle;
 
     Timer timer;
     TimerTask timerTask;
@@ -59,7 +59,7 @@ public class Training extends AppCompatActivity {
         ans2 = findViewById(R.id.button2);
         ans3 = findViewById(R.id.button3);
         txtQuestion = (TextView) findViewById(R.id.question);
-        txtTimer = (TextView) findViewById(R.id.txtTimer);
+        tittle = (TextView) findViewById(R.id.tittle);
 
         // создание таймера и его запуск
         timer = new Timer();
@@ -202,7 +202,7 @@ public class Training extends AppCompatActivity {
                     public void run()
                     {
                         time++;
-                        txtTimer.setText(getTimerText());
+                        tittle.setText(getTimerText());
                     }
                 });
             }

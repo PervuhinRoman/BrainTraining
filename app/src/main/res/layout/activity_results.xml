@@ -5,9 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Results"
-    android:orientation="vertical">
+    android:paddingTop="10dp">
 
-
+    <include
+        android:id="@+id/include"
+        layout="@layout/app_bar"
+        />
 
     <TextView
         android:id="@+id/txtTimeResult"
@@ -18,7 +21,8 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/include"
+        android:layout_marginTop="50dp"/>
 
     <TextView
         android:id="@+id/txtMistakes"
