@@ -31,35 +31,29 @@
         android:orientation="horizontal"
         android:layout_weight="1">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/custom_button"
             android:text="..."
             android:textSize="40sp"
             android:layout_gravity="center"
-            android:layout_weight="1"
-            android:layout_margin="10dp" />
+            android:layout_weight="1" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="..."
+            style="@style/custom_button"
             android:textSize="40sp"
             android:layout_gravity="center"
-            android:layout_weight="1"
-            android:layout_margin="10dp" />
+            android:layout_weight="1" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/custom_button"
             android:layout_gravity="center"
             android:text="..."
             android:textSize="40sp"
-            android:layout_weight="1"
-            android:layout_margin="10dp" />
+            android:layout_weight="1" />
     </LinearLayout>
 
 </LinearLayout>

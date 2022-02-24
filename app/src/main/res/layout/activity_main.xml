@@ -42,20 +42,16 @@
 
     <SeekBar
         android:id="@+id/seekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtExpressionsCount" />
+        app:layout_constraintTop_toBottomOf="@+id/txtExpressionsCount"
+        style="@style/seekbar_style" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnApply"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Apply"
-        android:background="@drawable/custom_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBar"
+        style="@style/custom_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
