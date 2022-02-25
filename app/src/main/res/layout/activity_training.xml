@@ -15,10 +15,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        style="@style/custom_text"
         android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:gravity="center"
         android:hint="Question"
         android:text=""
