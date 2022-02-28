@@ -3,10 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Acer/Documents/AndroidProjects/BrainTraining/app/src/main/res/layout/activity_main.xml" value="0.22010869565217392" />
+        <entry key="..\:/Users/Acer/Documents/AndroidProjects/BrainTraining/app/src/main/res/drawable/custom_app_bar.xml" value="0.21574074074074073" />
+        <entry key="..\:/Users/Acer/Documents/AndroidProjects/BrainTraining/app/src/main/res/drawable/custom_appbar.xml" value="0.2324074074074074" />
+        <entry key="..\:/Users/Acer/Documents/AndroidProjects/BrainTraining/app/src/main/res/drawable/custom_appbar_background.xml" value="0.2101851851851852" />
+        <entry key="..\:/Users/Acer/Documents/AndroidProjects/BrainTraining/app/src/main/res/drawable/custom_button.xml" value="0.21574074074074073" />
+        <entry key="..\:/Users/Acer/Documents/AndroidProjects/BrainTraining/app/src/main/res/drawable/custom_button_background.xml" value="0.21296296296296297" />
+        <entry key="..\:/Users/Acer/Documents/AndroidProjects/BrainTraining/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.2101851851851852" />
+        <entry key="..\:/Users/Acer/Documents/AndroidProjects/BrainTraining/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Acer/Documents/AndroidProjects/BrainTraining/app/src/main/res/layout/activity_results.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/Acer/Documents/AndroidProjects/BrainTraining/app/src/main/res/layout/activity_training.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/Acer/Documents/AndroidProjects/BrainTraining/app/src/main/res/layout/activity_training_test.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/Acer/Documents/AndroidProjects/BrainTraining/app/src/main/res/layout/app_bar.xml" value="0.34074074074074073" />
+        <entry key="..\:/Users/Acer/Documents/AndroidProjects/BrainTraining/app/src/main/res/layout/tool_bar.xml" value="0.16168478260869565" />
       </map>
     </option>
   </component>

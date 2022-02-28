@@ -4,34 +4,31 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
 
     Button btnApply;
     SeekBar expressionsCount;
     TextView txtExpressionsCount;
+    TextView tittle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // изменение заголовка активности так, чтобы не изменилось название приложения в лаунчере
-        setTitle("Parameters");
+        btnApply = findViewById(R.id.btnApply);
+        expressionsCount = findViewById(R.id.seekBar);
+        txtExpressionsCount = findViewById(R.id.txtExpressionsCount);
+        tittle = findViewById(R.id.tittle);
 
-        btnApply = (Button) findViewById(R.id.btnApply);
-        expressionsCount = (SeekBar) findViewById(R.id.seekBar);
-        txtExpressionsCount = (TextView) findViewById(R.id.txtExpressionsCount);
+        tittle.setText("Home");
 
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (NumberFormatException e){
                     // обработка исключения: пустая строка кол-ва выражений
                     Toast nfeToast = Toast.makeText(getApplicationContext(), "Enter the expressions count", Toast.LENGTH_SHORT);
+                    nfeToast.setGravity(Gravity.CENTER, 0, 0);
                     nfeToast.show();
                 }
             }
@@ -62,8 +60,3 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
-
-/*
-*  TODO: разработать дизайн
-*  TODO: навести "марофет"
-*/

@@ -22,6 +22,7 @@ public class Results extends AppCompatActivity {
     Button btnGoHome;
     TextView txtTime;
     TextView txtMistakes;
+    TextView tittle;
     TextView rightAnswersHeader;
     TextView userAnswersHeader;
     LinearLayout rightAnswersArrayLinearLayout;
@@ -46,6 +47,9 @@ public class Results extends AppCompatActivity {
         userAnswersHeader = (TextView) findViewById(R.id.userAnswersHeader);
         rightAnswersArrayLinearLayout = (LinearLayout) findViewById(R.id.rightAnswersArrayLinearLayout);
         userAnswersArrayLinearLayout = (LinearLayout) findViewById(R.id.userAnswersArrayLinearLayout);
+        tittle = findViewById(R.id.tittle);
+
+        tittle.setText("Results");
 
         // получение времени выполнения задания
         Intent intent = getIntent();
