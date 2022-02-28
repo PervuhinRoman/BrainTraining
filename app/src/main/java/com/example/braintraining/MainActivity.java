@@ -60,7 +60,3 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
-
-/*
-*  TODO: навести "марофет"
-*/
