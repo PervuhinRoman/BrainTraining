@@ -23,4 +23,18 @@
         <item name="android:textColor">@color/myBlack</item>
         <item name="fontFamily">@font/roboto_light</item>
     </style>
+
+    <style name="custom_right_answers">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/custom_right_answers_background</item>
+    </style>
+
+    <style name="custom_wrong_answers">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/custom_wrong_answers_background</item>
+    </style>
 </resources>

@@ -3,6 +3,7 @@ package com.example.braintraining;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -113,31 +114,29 @@ public class Results extends AppCompatActivity {
 
     void generateTextViewFromArray(){
         for(int i = 0; i < userAnswers.size(); i++){
-            // натройка оформления вывода правильного ответа
-            TextView rightItem = new TextView(Results.this);
+            // настройка layout атрибутов
             LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            rightItem.setBackgroundResource(R.color.okColor);
-            rightItem.setGravity(Gravity.CENTER);
-            rightItem.setTextSize(20);
             textViewLayoutParams.setMargins(10, 10, 10, 10);
+
+            // натройка оформления вывода правильного ответа
+            TextView rightItem = new TextView(Results.this, null, 0, R.style.custom_right_answers);
+            rightItem.setTypeface(Typeface.DEFAULT_BOLD);
             rightItem.setLayoutParams(textViewLayoutParams);
 
             // натройка оформления вывода пользовательского ответа
-            TextView userItem = new TextView(Results.this);
+            TextView userItem = new TextView(Results.this, null, 0, R.style.custom_wrong_answers);
+            userItem.setTypeface(Typeface.DEFAULT_BOLD);
+            userItem.setLayoutParams(textViewLayoutParams);
 
             // установка цвета ответа
             if(Integer.toString(rightAnswers.get(i)) == Integer.toString(userAnswers.get(i))){
-                userItem.setBackgroundResource(R.color.okColor);
+                userItem.setBackgroundResource(R.drawable.custom_right_answers_background);
             } else {
-                userItem.setBackgroundResource(R.color.noColor);
+                userItem.setBackgroundResource(R.drawable.custom_wrong_answers_background);
 
                 // подсчёт кол-ва ошибок
                 expressionsCount++;
             }
-
-            userItem.setGravity(Gravity.CENTER);
-            userItem.setTextSize(20);
-            userItem.setLayoutParams(textViewLayoutParams);
 
             // вывод текущего верного ответа
             rightItem.setText(Integer.toString(rightAnswers.get(i)));

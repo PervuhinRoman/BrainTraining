@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="custom_answers">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/custom_right_answers_background</item>
+    </style>
+</resources>

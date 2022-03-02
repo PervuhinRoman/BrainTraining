@@ -16,41 +16,44 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginStart="10dp"
         android:layout_weight="0"
         android:text="Expressions count: "
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
     <EditText
         android:id="@+id/txtExpressionsCount"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="40dp"
         android:layout_weight="0"
+        android:background="@null"
         android:gravity="center"
         android:hint="1 - 50"
         android:inputType="number"
+        android:minHeight="48dp"
         android:text=""
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/include" />
 
     <SeekBar
-        android:padding="0dp"
         android:id="@+id/seekBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtExpressionsCount"
         style="@style/seekbar_style"
+        android:layout_marginTop="20dp"
+        android:padding="0dp"
         android:progressBackgroundTint="@color/myBlack"
         android:progressTint="@color/myBlack"
-        android:thumbTint="@color/myBlack"/>
+        android:thumbTint="@color/myBlack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnApply"
