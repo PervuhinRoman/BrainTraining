@@ -1,12 +1,15 @@
 package com.example.braintraining;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     SeekBar expressionsCount;
     TextView txtExpressionsCount;
     TextView tittle;
+    ImageView menuIcon;
+    DrawerLayout navLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +33,18 @@ public class MainActivity extends AppCompatActivity {
         txtExpressionsCount = findViewById(R.id.txtExpressionsCount);
         tittle = findViewById(R.id.tittle);
 
+        navLayout = findViewById(R.id.nav_layout);
+        menuIcon = findViewById(R.id.menu);
+
         tittle.setText("Home");
+
+        menuIcon.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("WrongConstant")
+            @Override
+            public void onClick(View view) {
+                navLayout.openDrawer(Gravity.START);
+            }
+        });
 
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override

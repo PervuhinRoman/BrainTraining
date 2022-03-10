@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:background="@drawable/custom_drawer_nav_background">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Menu"
+        style="@style/custom_text"
+        android:textSize="36sp"
+        android:textFontWeight="1000"
+        android:layout_marginStart="16dp"
+        android:layout_gravity="start"/>
+</LinearLayout>

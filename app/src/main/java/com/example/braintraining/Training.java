@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -29,6 +30,7 @@ public class Training extends AppCompatActivity {
     Button ans3;
     TextView txtQuestion;
     TextView tittle;
+    ImageView menuIcon;
 
     Timer timer;
     TimerTask timerTask;
@@ -60,8 +62,12 @@ public class Training extends AppCompatActivity {
         ans1 = findViewById(R.id.button1);
         ans2 = findViewById(R.id.button2);
         ans3 = findViewById(R.id.button3);
-        txtQuestion = (TextView) findViewById(R.id.question);
-        tittle = (TextView) findViewById(R.id.tittle);
+        txtQuestion = findViewById(R.id.question);
+        tittle = findViewById(R.id.tittle);
+        menuIcon = findViewById(R.id.menu);
+
+        // скрывает элемент гамбургера меню
+        menuIcon.setVisibility(View.GONE);
 
         // создание таймера и его запуск
         timer = new Timer();

@@ -1,7 +1,9 @@
 package com.example.braintraining;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,6 +31,8 @@ public class Results extends AppCompatActivity {
     TextView userAnswersHeader;
     LinearLayout rightAnswersArrayLinearLayout;
     LinearLayout userAnswersArrayLinearLayout;
+    DrawerLayout navLayout;
+    ImageView menuIcon;
 
     int expressionsCount = 0;
     Double time = 0.0;
@@ -48,9 +53,19 @@ public class Results extends AppCompatActivity {
         userAnswersHeader = (TextView) findViewById(R.id.userAnswersHeader);
         rightAnswersArrayLinearLayout = (LinearLayout) findViewById(R.id.rightAnswersArrayLinearLayout);
         userAnswersArrayLinearLayout = (LinearLayout) findViewById(R.id.userAnswersArrayLinearLayout);
+        navLayout = findViewById(R.id.nav_layout);
+        menuIcon = findViewById(R.id.menu);
         tittle = findViewById(R.id.tittle);
-
         tittle.setText("Results");
+
+        // обработка navigation drawer
+        menuIcon.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("WrongConstant")
+            @Override
+            public void onClick(View view) {
+                navLayout.openDrawer(Gravity.START);
+            }
+        });
 
         // получение времени выполнения задания
         Intent intent = getIntent();
