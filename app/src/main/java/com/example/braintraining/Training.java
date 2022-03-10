@@ -50,7 +50,7 @@ public class Training extends AppCompatActivity {
 
     int currentExp = 0;               // кол-во решённых выражений
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    //@RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
