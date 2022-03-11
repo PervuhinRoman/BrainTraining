@@ -10,13 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BrainTraining">
         <activity
-            android:label="Results of your test"
-            android:name=".Results"
+            android:name=".AboutApp"
             android:exported="false" />
         <activity
-            android:label="Training"
+            android:name=".Results"
+            android:exported="false"
+            android:label="Results of your test" />
+        <activity
             android:name=".Training"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Training" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

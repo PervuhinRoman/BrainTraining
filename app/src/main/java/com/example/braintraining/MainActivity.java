@@ -1,5 +1,6 @@
 package com.example.braintraining;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -7,12 +8,15 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tittle;
     ImageView menuIcon;
     DrawerLayout navLayout;
+    NavigationView navView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +39,30 @@ public class MainActivity extends AppCompatActivity {
         tittle = findViewById(R.id.tittle);
 
         navLayout = findViewById(R.id.nav_layout);
+        navView = findViewById(R.id.navigation);
         menuIcon = findViewById(R.id.menu);
 
         tittle.setText("Home");
 
+        // открытие меню по нжатию на гамбургер меню
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("WrongConstant")
             @Override
             public void onClick(View view) {
                 navLayout.openDrawer(Gravity.START);
+            }
+        });
+
+        // обработка навигации
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                if (id == R.id.about){
+                    Intent newIntent = new Intent(getApplicationContext(), AboutApp.class);
+                    startActivity(newIntent);
+                }
+                return true;
             }
         });
 
