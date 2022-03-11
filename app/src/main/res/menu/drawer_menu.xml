@@ -18,7 +18,7 @@
             android:title="Remove ad"/>
         <item android:id="@+id/secret_key"
             android:icon="@drawable/outline_key_24"
-            android:title="About app"/>
+            android:title="Secret key"/>
         <item android:id="@+id/about"
             android:icon="@drawable/outline_info_24"
             android:title="About app"/>

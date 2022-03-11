@@ -16,8 +16,7 @@
 
         <include
             android:id="@+id/include"
-            layout="@layout/app_bar"
-            />
+            layout="@layout/app_bar" />
 
         <TextView
             android:id="@+id/txtTimeResult"
