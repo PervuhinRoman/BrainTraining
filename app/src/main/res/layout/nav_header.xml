@@ -9,7 +9,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/navigation_drawer_tittle"
+        android:text="@string/navigation_drawer_title"
         style="@style/custom_text"
         android:textSize="36sp"
         android:textFontWeight="1000"

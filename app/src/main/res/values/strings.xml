@@ -1,23 +1,29 @@
 <resources>
     <string name="app_name">BrainTraining</string>
-    
+
     <!-- MainActivity -->
-    <string name="tittle_of_mainActivity">Home</string>
+    <string name="title_of_mainActivity">Home</string>
     <string name="enter_number_of_expressions">Expressions count:</string>
     <string name="button_apply">Apply</string>
-    
+
     <!-- ResultsActivity -->
-    <string name="tittle_of_resultsActivity">Results</string>
+    <string name="title_of_resultsActivity">Results</string>
     <string name="solution_time">Time:</string>
     <string name="mistakes_count">Mistakes:</string>
     <string name="userAnswersHeader">Your answers:</string>
     <string name="rightAnswersHeader">Right answers:</string>
     <string name="btnAgain">Again</string>
     <string name="btnGoHome">Home</string>
-    
+
+    <!-- SettingsActivity -->
+    <string name="title_of_settingsActivity">Settings</string>
+    <string name="btnChangeLanguages">Сhange app language</string>
+    <!-- Languages dialog -->
+    <string name="dialog_title">Change the language...</string>
+
     <!-- Navigation drawer -->
     <!-- Header -->
-    <string name="navigation_drawer_tittle">Menu</string>
+    <string name="navigation_drawer_title">Menu</string>
     <!-- Menu -->
     <string name="start">Start</string>
     <string name="results">Results</string>

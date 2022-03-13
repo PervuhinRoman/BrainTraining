@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BrainTraining</string>
-    <string name="tittle_of_mainActivity">Домашняя старница</string>
+    <string name="title_of_mainActivity">Домашняя старница</string>
     <string name="enter_number_of_expressions">Кол-во примеров:</string>
     <string name="button_apply">Начать</string>
-    <string name="tittle_of_resultsActivity">Результаты</string>
+    <string name="title_of_resultsActivity">Результаты</string>
     <string name="solution_time">Время:</string>
     <string name="mistakes_count">Ошибки:</string>
     <string name="userAnswersHeader">Ваши ответы:</string>
     <string name="rightAnswersHeader">Правильные ответы:</string>
     <string name="btnAgain">Снова</string>
     <string name="btnGoHome">Домой</string>
-    <string name="navigation_drawer_tittle">Меню</string>
+    <string name="navigation_drawer_title">Меню</string>
     <string name="start">Начать тест</string>
     <string name="results">Результаты</string>
     <string name="settings">Настройки</string>
@@ -19,4 +19,7 @@
     <string name="secret_key">Секретный ключ</string>
     <string name="about_app">О приложении</string>
     <string name="share">Поделиться</string>
+    <string name="btnChangeLanguages">Изменить язык приложения</string>
+    <string name="title_of_settingsActivity">Настройки приложения</string>
+    <string name="dialog_title">Сменить язык на...</string>
 </resources>

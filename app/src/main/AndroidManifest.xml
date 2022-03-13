@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BrainTraining">
         <activity
+            android:name=".Settings"
+            android:exported="false" />
+        <activity
             android:name=".AboutApp"
             android:exported="false" />
         <activity

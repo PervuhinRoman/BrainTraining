@@ -8,10 +8,10 @@
     android:elevation="4dp">
 
     <TextView
-        android:id="@+id/tittle_of_appBar"
+        android:id="@+id/title_of_appBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tittle_of_mainActivity"
+        android:text="@string/title_of_mainActivity"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,28 +1,32 @@
 package com.example.braintraining;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.backup.SharedPreferencesBackupHelper;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Locale;
 
-    Button btnApply;
-    SeekBar expressionsCount;
-    TextView txtExpressionsCount;
+public class Settings extends AppCompatActivity {
+
+    Button changeLangBtn;
     TextView title;
     ImageView menuIcon;
     DrawerLayout navigationDrawerLayout;
@@ -31,20 +35,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_settings);
 
-        btnApply = findViewById(R.id.btnApply);
-        expressionsCount = findViewById(R.id.expressions_count_seekBar);
-        txtExpressionsCount = findViewById(R.id.expressions_count);
-        title = findViewById(R.id.title_of_appBar);
-
+        changeLangBtn = findViewById(R.id.change_lang_button);
         navigationDrawerLayout = findViewById(R.id.navigation_drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
         menuIcon = findViewById(R.id.menu_icon);
+        title = findViewById(R.id.title_of_appBar);
+        title.setText(getResources().getString(R.string.title_of_settingsActivity));
 
-        title.setText(getResources().getString(R.string.title_of_mainActivity));
-
-        // открытие меню по нжатию на гамбургер меню
+        // открытие меню по нажатию на гамбургер меню
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("WrongConstant")
             @Override
@@ -70,35 +70,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return true;
             }
-        });
-
-        btnApply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    Intent intent = new Intent(getApplicationContext(), Training.class);
-                    intent.putExtra("expressionsCount", Integer.parseInt(txtExpressionsCount.getText().toString()));
-                    startActivity(intent);
-                } catch (NumberFormatException e){
-                    // обработка исключения: пустая строка кол-ва выражений
-                    Toast nfeToast = Toast.makeText(getApplicationContext(), "Enter the expressions count", Toast.LENGTH_SHORT);
-                    nfeToast.setGravity(Gravity.CENTER, 0, 0);
-                    nfeToast.show();
-                }
-            }
-        });
-
-        expressionsCount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                txtExpressionsCount.setText(Integer.toString(progress / 2));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) { }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) { }
         });
     }
 }

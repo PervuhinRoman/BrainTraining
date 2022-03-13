@@ -30,7 +30,7 @@ public class Training extends AppCompatActivity {
     Button ans2;
     Button ans3;
     TextView txtQuestion;
-    TextView tittle;
+    TextView title;
     ImageView menuIcon;
 
     Timer timer;
@@ -64,7 +64,7 @@ public class Training extends AppCompatActivity {
         ans2 = findViewById(R.id.button2);
         ans3 = findViewById(R.id.button3);
         txtQuestion = findViewById(R.id.question);
-        tittle = findViewById(R.id.tittle_of_appBar);
+        title = findViewById(R.id.title_of_appBar);
         menuIcon = findViewById(R.id.menu_icon);
 
         // скрывает элемент гамбургера меню
@@ -211,7 +211,7 @@ public class Training extends AppCompatActivity {
                     public void run()
                     {
                         time++;
-                        tittle.setText(getTimerText());
+                        title.setText(getTimerText());
                     }
                 });
             }

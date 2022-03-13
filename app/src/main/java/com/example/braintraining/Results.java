@@ -26,7 +26,7 @@ public class Results extends AppCompatActivity {
     Button btnGoHome;
     TextView txtTime;
     TextView txtMistakes;
-    TextView tittle;
+    TextView title;
     TextView rightAnswersHeader;
     TextView userAnswersHeader;
     LinearLayout rightAnswersArrayLinearLayout;
@@ -55,8 +55,8 @@ public class Results extends AppCompatActivity {
         userAnswersArrayLinearLayout = findViewById(R.id.userAnswersArrayLinearLayout);
         navigationDrawerLayout = findViewById(R.id.navigation_drawer_layout);
         menuIcon = findViewById(R.id.menu_icon);
-        tittle = findViewById(R.id.tittle_of_appBar);
-        tittle.setText(R.string.tittle_of_resultsActivity);
+        title = findViewById(R.id.title_of_appBar);
+        title.setText(R.string.title_of_resultsActivity);
 
         // обработка navigation drawer
         menuIcon.setOnClickListener(new View.OnClickListener() {
