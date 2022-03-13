@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/nav_layout"
+    android:id="@+id/navigation_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,48 +15,48 @@
         android:paddingTop="10dp">
 
         <include
-            android:id="@+id/include"
+            android:id="@+id/included_app_bar"
             layout="@layout/app_bar" />
 
         <TextView
-            android:id="@+id/txtTimeResult"
+            android:id="@+id/solution_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Time: "
+            android:text="@string/solution_time"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include"
+            app:layout_constraintTop_toBottomOf="@+id/included_app_bar"
             android:layout_marginTop="50dp"/>
 
         <TextView
-            android:id="@+id/txtMistakes"
+            android:id="@+id/mistakes_count"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Mistakes: "
+            android:text="@string/mistakes_count"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtTimeResult" />
+            app:layout_constraintTop_toBottomOf="@+id/solution_time" />
 
         <LinearLayout
             android:layout_marginTop="10dp"
-            android:id="@+id/headers"
+            android:id="@+id/headers_of_answers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/scrollView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtMistakes">
+            app:layout_constraintTop_toBottomOf="@+id/mistakes_count">
 
             <TextView
                 android:id="@+id/userAnswersHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Your answers: "
+                android:text="@string/userAnswersHeader"
                 android:textSize="20sp"
                 android:gravity="center"
                 android:layout_weight="1"/>
@@ -65,7 +65,7 @@
                 android:id="@+id/rightAnswersHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Right answers: "
+                android:text="@string/rightAnswersHeader"
                 android:textSize="20sp"
                 android:gravity="center"
                 android:layout_weight="1"/>
@@ -79,7 +79,7 @@
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/headers">
+            app:layout_constraintTop_toBottomOf="@+id/headers_of_answers">
 
             <LinearLayout
                 android:id="@+id/columns"
@@ -120,13 +120,13 @@
                 android:id="@+id/btnAgain"
                 style="@style/custom_button"
                 android:layout_weight="1"
-                android:text="Again" />
+                android:text="@string/btnAgain" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnGoHome"
                 style="@style/custom_button"
                 android:layout_weight="1"
-                android:text="Home " />
+                android:text="@string/btnGoHome" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

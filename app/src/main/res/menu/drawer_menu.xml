@@ -6,24 +6,24 @@
     <group android:checkableBehavior="single">
         <item android:id="@+id/start_training"
             android:icon="@drawable/outline_quiz_24"
-            android:title="Start" />
+            android:title="@string/start" />
         <item android:id="@+id/results"
             android:icon="@drawable/outline_checklist"
-            android:title="Results"/>
+            android:title="@string/results"/>
         <item android:id="@+id/settings"
             android:icon="@drawable/outline_settings_24"
-            android:title="Settings"/>
+            android:title="@string/settings"/>
         <item android:id="@+id/remove_ad"
             android:icon="@drawable/outline_shop_24"
-            android:title="Remove ad"/>
+            android:title="@string/remove_ad"/>
         <item android:id="@+id/secret_key"
             android:icon="@drawable/outline_key_24"
-            android:title="Secret key"/>
+            android:title="@string/secret_key"/>
         <item android:id="@+id/about"
             android:icon="@drawable/outline_info_24"
-            android:title="About app"/>
+            android:title="@string/about_app"/>
         <item android:id="@+id/share"
             android:icon="@drawable/outline_share_24"
-            android:title="Share"/>
+            android:title="@string/share"/>
     </group>
 </menu>

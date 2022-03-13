@@ -31,7 +31,7 @@ public class Results extends AppCompatActivity {
     TextView userAnswersHeader;
     LinearLayout rightAnswersArrayLinearLayout;
     LinearLayout userAnswersArrayLinearLayout;
-    DrawerLayout navLayout;
+    DrawerLayout navigationDrawerLayout;
     ImageView menuIcon;
 
     int expressionsCount = 0;
@@ -45,25 +45,25 @@ public class Results extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
-        btnAgain = (Button) findViewById(R.id.btnAgain);
-        btnGoHome = (Button) findViewById(R.id.btnGoHome);
-        txtTime = (TextView) findViewById(R.id.txtTimeResult);
-        txtMistakes = (TextView) findViewById(R.id.txtMistakes);
-        rightAnswersHeader = (TextView) findViewById(R.id.rightAnswersHeader);
-        userAnswersHeader = (TextView) findViewById(R.id.userAnswersHeader);
-        rightAnswersArrayLinearLayout = (LinearLayout) findViewById(R.id.rightAnswersArrayLinearLayout);
-        userAnswersArrayLinearLayout = (LinearLayout) findViewById(R.id.userAnswersArrayLinearLayout);
-        navLayout = findViewById(R.id.nav_layout);
-        menuIcon = findViewById(R.id.menu);
-        tittle = findViewById(R.id.tittle);
-        tittle.setText("Results");
+        btnAgain = findViewById(R.id.btnAgain);
+        btnGoHome = findViewById(R.id.btnGoHome);
+        txtTime = findViewById(R.id.solution_time);
+        txtMistakes = findViewById(R.id.mistakes_count);
+        rightAnswersHeader = findViewById(R.id.rightAnswersHeader);
+        userAnswersHeader = findViewById(R.id.userAnswersHeader);
+        rightAnswersArrayLinearLayout = findViewById(R.id.rightAnswersArrayLinearLayout);
+        userAnswersArrayLinearLayout = findViewById(R.id.userAnswersArrayLinearLayout);
+        navigationDrawerLayout = findViewById(R.id.navigation_drawer_layout);
+        menuIcon = findViewById(R.id.menu_icon);
+        tittle = findViewById(R.id.tittle_of_appBar);
+        tittle.setText(R.string.tittle_of_resultsActivity);
 
         // обработка navigation drawer
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("WrongConstant")
             @Override
             public void onClick(View view) {
-                navLayout.openDrawer(Gravity.START);
+                navigationDrawerLayout.openDrawer(Gravity.START);
             }
         });
 
@@ -71,7 +71,7 @@ public class Results extends AppCompatActivity {
         Intent intent = getIntent();
         time = intent.getDoubleExtra("time", 0.0);
         Log.d(LOG_TAG, "Time from Training: " + time);
-        txtTime.setText("Time: " + getTimerText(time));
+        txtTime.setText(getResources().getString(R.string.solution_time) + " " + getTimerText(time));
 
         // получение пользовательских ответов
         userAnswers = intent.getIntegerArrayListExtra("userAnswers");
@@ -82,7 +82,7 @@ public class Results extends AppCompatActivity {
         generateTextViewFromArray();
 
         // вывод кол-ва ошибок
-        txtMistakes.setText("Mistakes: " + Integer.toString(expressionsCount) + " / " + Integer.toString(rightAnswers.size()));
+        txtMistakes.setText(getResources().getString(R.string.mistakes_count) + " " + expressionsCount + " / " + rightAnswers.size());
 
         // обрабока нажатия на кнопку Home
         btnGoHome.setOnClickListener(new View.OnClickListener() {

@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
     TextView txtExpressionsCount;
     TextView tittle;
     ImageView menuIcon;
-    DrawerLayout navLayout;
-    NavigationView navView;
+    DrawerLayout navigationDrawerLayout;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,27 +34,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnApply = findViewById(R.id.btnApply);
-        expressionsCount = findViewById(R.id.seekBar);
-        txtExpressionsCount = findViewById(R.id.txtExpressionsCount);
-        tittle = findViewById(R.id.tittle);
+        expressionsCount = findViewById(R.id.expressions_count_seekBar);
+        txtExpressionsCount = findViewById(R.id.expressions_count);
+        tittle = findViewById(R.id.tittle_of_appBar);
 
-        navLayout = findViewById(R.id.nav_layout);
-        navView = findViewById(R.id.navigation);
-        menuIcon = findViewById(R.id.menu);
+        navigationDrawerLayout = findViewById(R.id.navigation_drawer_layout);
+        navigationView = findViewById(R.id.navigation_view);
+        menuIcon = findViewById(R.id.menu_icon);
 
-        tittle.setText("Home");
+        tittle.setText(getResources().getString(R.string.tittle_of_mainActivity));
 
         // открытие меню по нжатию на гамбургер меню
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("WrongConstant")
             @Override
             public void onClick(View view) {
-                navLayout.openDrawer(Gravity.START);
+                navigationDrawerLayout.openDrawer(Gravity.START);
             }
         });
 
         // обработка навигации
-        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();

@@ -8,10 +8,10 @@
     android:elevation="4dp">
 
     <TextView
-        android:id="@+id/tittle"
+        android:id="@+id/tittle_of_appBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tittle"
+        android:text="@string/tittle_of_mainActivity"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/menu"
+        android:id="@+id/menu_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 
@@ -63,8 +64,8 @@ public class Training extends AppCompatActivity {
         ans2 = findViewById(R.id.button2);
         ans3 = findViewById(R.id.button3);
         txtQuestion = findViewById(R.id.question);
-        tittle = findViewById(R.id.tittle);
-        menuIcon = findViewById(R.id.menu);
+        tittle = findViewById(R.id.tittle_of_appBar);
+        menuIcon = findViewById(R.id.menu_icon);
 
         // скрывает элемент гамбургера меню
         menuIcon.setVisibility(View.GONE);
