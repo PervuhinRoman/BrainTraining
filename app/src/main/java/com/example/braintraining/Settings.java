@@ -63,10 +63,6 @@ public class Settings extends AppCompatActivity {
                         Intent newIntent = new Intent(getApplicationContext(), AboutApp.class);
                         startActivity(newIntent);
                         break;
-                    case R.id.settings:
-                        newIntent = new Intent(getApplicationContext(), Settings.class);
-                        startActivity(newIntent);
-                        break;
                 }
                 return true;
             }

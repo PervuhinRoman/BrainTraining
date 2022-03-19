@@ -7,12 +7,12 @@
         <item android:id="@+id/start_training"
             android:icon="@drawable/outline_quiz_24"
             android:title="@string/start" />
-        <item android:id="@+id/results"
+        <!-- <item android:id="@+id/results"
             android:icon="@drawable/outline_checklist"
-            android:title="@string/results"/>
-        <item android:id="@+id/settings"
+            android:title="@string/results"/> -->
+        <!-- <item android:id="@+id/settings"
             android:icon="@drawable/outline_settings_24"
-            android:title="@string/settings"/>
+            android:title="@string/settings"/> -->
         <item android:id="@+id/remove_ad"
             android:icon="@drawable/outline_shop_24"
             android:title="@string/remove_ad"/>
@@ -22,8 +22,8 @@
         <item android:id="@+id/about"
             android:icon="@drawable/outline_info_24"
             android:title="@string/about_app"/>
-        <item android:id="@+id/share"
+        <!-- <item android:id="@+id/share"
             android:icon="@drawable/outline_share_24"
-            android:title="@string/share"/>
+            android:title="@string/share"/> -->
     </group>
 </menu>

@@ -7,9 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:openDrawer="start">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="10dp"
@@ -61,14 +59,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/enter_number_of_expressions" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageView
+            android:id="@+id/btn_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/expressions_count_seekBar"
+            app:srcCompat="@drawable/ic_start_button_60" />
+
+        <!--<androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnApply"
             style="@style/custom_button"
             android:text="@string/button_apply"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/expressions_count_seekBar" />
+            app:layout_constraintTop_toBottomOf="@+id/expressions_count_seekBar" /> -->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

@@ -2,7 +2,7 @@
     <string name="app_name">BrainTraining</string>
 
     <!-- MainActivity -->
-    <string name="title_of_mainActivity">Home</string>
+    <string name="title_of_mainActivity">Test options</string>
     <string name="enter_number_of_expressions">Expressions count:</string>
     <string name="button_apply">Apply</string>
 
@@ -14,6 +14,10 @@
     <string name="rightAnswersHeader">Right answers:</string>
     <string name="btnAgain">Again</string>
     <string name="btnGoHome">Home</string>
+
+    <!-- SplashScreenActivity -->
+    <string name="start_training">Start brain training</string>
+    <string name="title_of_splashScreen">Home</string>
 
     <!-- SettingsActivity -->
     <string name="title_of_settingsActivity">Settings</string>

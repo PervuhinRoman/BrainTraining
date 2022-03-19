@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BrainTraining</string>
-    <string name="title_of_mainActivity">Домашняя старница</string>
     <string name="enter_number_of_expressions">Кол-во примеров:</string>
     <string name="button_apply">Начать</string>
     <string name="title_of_resultsActivity">Результаты</string>
@@ -22,4 +21,7 @@
     <string name="btnChangeLanguages">Изменить язык приложения</string>
     <string name="title_of_settingsActivity">Настройки приложения</string>
     <string name="dialog_title">Сменить язык на...</string>
+    <string name="start_training">Приступить к тренировке мозга</string>
+    <string name="title_of_mainActivity">Параметры теста</string>
+    <string name="title_of_splashScreen">Домашняя страница</string>
 </resources>
