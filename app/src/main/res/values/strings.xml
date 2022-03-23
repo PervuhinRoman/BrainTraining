@@ -20,6 +20,9 @@
     <string name="start_training">Start brain training</string>
     <string name="title_of_splashScreen">Home</string>
 
+    <!-- AboutAppActivity -->
+    <string name="title_of_aboutActivity">About app</string>
+
     <!-- SettingsActivity -->
     <string name="title_of_settingsActivity">Settings</string>
     <string name="btnChangeLanguages">Сhange app language</string>

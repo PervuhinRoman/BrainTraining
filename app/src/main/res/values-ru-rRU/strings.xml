@@ -25,4 +25,5 @@
     <string name="title_of_splashScreen">Домашняя страница</string>
     <string name="enter_numbers_count">Кол-во чисел в примере:</string>
     <string name="enter_the_expressions_count">Введите кол-во выражений</string>
+    <string name="title_of_aboutActivity">О приложении</string>
 </resources>
