@@ -238,7 +238,7 @@ public class Training extends AppCompatActivity {
     void optimize(Button ans){
         // добавление пользовательского ответа в массив пользовательских ответов
         userAnswers.add(Integer.parseInt(ans.getText().toString()));
-        Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers);
+        Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers + '\n' + expressions);
 
         // проверка кол-ва решённых выражений
         if(currentExp == expressionsCount - 1){

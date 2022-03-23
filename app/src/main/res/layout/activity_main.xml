@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:openDrawer="start">
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -66,17 +66,46 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/expressions_count_seekBar"
+            app:layout_constraintTop_toBottomOf="@+id/numbers_count_seekBar"
             app:srcCompat="@drawable/ic_start_button_60" />
 
-        <!--<androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnApply"
-            style="@style/custom_button"
-            android:text="@string/button_apply"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <TextView
+            android:id="@+id/enter_numbers_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/enter_numbers_count"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/expressions_count_seekBar" />
+
+        <EditText
+            android:id="@+id/numbers_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="center"
+            android:hint="1 - 50"
+            android:layout_marginTop="40dp"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:text=""
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/expressions_count"
+            app:layout_constraintTop_toBottomOf="@+id/expressions_count_seekBar" />
+
+        <SeekBar
+            android:id="@+id/numbers_count_seekBar"
+            style="@style/seekbar_style"
+            android:layout_marginTop="20dp"
+            android:padding="0dp"
+            android:progressBackgroundTint="@color/myBlack"
+            android:progressTint="@color/myBlack"
+            android:thumbTint="@color/myBlack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/expressions_count_seekBar" /> -->
+            app:layout_constraintTop_toBottomOf="@+id/enter_numbers_count" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
