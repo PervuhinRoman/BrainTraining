@@ -1,24 +1,20 @@
 package com.example.braintraining;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,6 +22,7 @@ public class Training extends AppCompatActivity {
 
     private static final String LOG_TAG = "ArraysState";
 
+    // взаимодействие с UI
     Button ans1;
     Button ans2;
     Button ans3;
@@ -33,24 +30,30 @@ public class Training extends AppCompatActivity {
     TextView title;
     ImageView menuIcon;
 
+    // для таймера
     Timer timer;
     TimerTask timerTask;
     Double time = 0.0;
 
+    // для генерации выражений
     String question = "";             // выражение
+    int questionsCount;               // кол-во выражений
+    int numbersCount;                 // кол-во чисел в выражении
+    int answersRange;                 // диапазон ответов
     int rightAnswer = 0;              // правильный ответ
 
-    List<Integer> userAnswers = new ArrayList<>();              // массив пользовательских ответов
-    List<Integer> rightAnswers = new ArrayList<>();             // массив правильных ответов
-
-    int expressionsCount;                                        // кол-во выражений
-    List<String> expressions = new ArrayList<>();                // массив выражений
+    ArrayList<Integer> alreadyGeneratedNumbers = new ArrayList<>(); // для генерации
+    ArrayList<Integer> alreadyGeneratedAnswers = new ArrayList<>(); // для генерации
 
     String[] actions = {"+", "-"};    // список действий
+    String action;                    // элемент действия для выражения
+    String prevAction;
+
+    ArrayList<Integer> userAnswers = new ArrayList<>();              // массив пользовательских ответов
+    ArrayList<Integer> rightAnswers = new ArrayList<>();             // массив правильных ответов
+    ArrayList<String> questions = new ArrayList<>();                 // массив выражений
 
     int number;                       // элемент цифры для выражения
-    String action;                    // элемент действия для выражения
-
     int currentExp = 0;               // кол-во решённых выражений
 
     //@RequiresApi(api = Build.VERSION_CODES.M)
@@ -76,8 +79,8 @@ public class Training extends AppCompatActivity {
 
         // кол-во выражений, которые необходимо решить, полученное из MainActivity
         Intent expressionsCountIntent = getIntent();
-        expressionsCount = expressionsCountIntent.getIntExtra("expressionsCount", 50);
-        Log.d(LOG_TAG, "Expressions count from MainActivity: " + expressionsCount);
+        questionsCount = expressionsCountIntent.getIntExtra("expressionsCount", 50);
+        Log.d(LOG_TAG, "Expressions count from MainActivity: " + questionsCount);
 
         // создание "нулевого" выражения
         onButtonClick();
@@ -150,7 +153,7 @@ public class Training extends AppCompatActivity {
         }
 
         // готовое выражение
-        expressions.add(question);
+        questions.add(question);
         txtQuestion.setText(question);
         question = "";
 
@@ -238,10 +241,10 @@ public class Training extends AppCompatActivity {
     void optimize(Button ans){
         // добавление пользовательского ответа в массив пользовательских ответов
         userAnswers.add(Integer.parseInt(ans.getText().toString()));
-        Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers + '\n' + expressions);
+        Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers + '\n' + questions);
 
         // проверка кол-ва решённых выражений
-        if(currentExp == expressionsCount - 1){
+        if(currentExp == questionsCount - 1){
             // остановка таймера
             timerTask.cancel();
 
@@ -249,7 +252,7 @@ public class Training extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), Results.class);
 
             // передаём кол-во выражений в Results
-            intent.putExtra("expressionsCount", expressionsCount);
+            intent.putExtra("expressionsCount", questionsCount);
 
             // передаём время выполнения в Results
             intent.putExtra("time", time);
