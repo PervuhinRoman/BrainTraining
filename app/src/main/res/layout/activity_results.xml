@@ -4,11 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:openDrawer="start">
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".Results"
@@ -53,6 +50,15 @@
             app:layout_constraintTop_toBottomOf="@+id/mistakes_count">
 
             <TextView
+                android:id="@+id/questionsHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="@string/questionsHeader" />
+
+            <TextView
                 android:id="@+id/userAnswersHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -83,9 +89,18 @@
 
             <LinearLayout
                 android:id="@+id/columns"
+                android:weightSum="3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/questionsArrayLinearLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/userAnswersArrayLinearLayout"

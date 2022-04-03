@@ -31,14 +31,16 @@ public class Results extends AppCompatActivity {
     TextView userAnswersHeader;
     LinearLayout rightAnswersArrayLinearLayout;
     LinearLayout userAnswersArrayLinearLayout;
+    LinearLayout questionsArrayLinearLayout;
     DrawerLayout navigationDrawerLayout;
     ImageView menuIcon;
 
     int expressionsCount = 0;
     Double time = 0.0;
 
-    List<Integer> userAnswers = new ArrayList<>();              // массив пользовательских ответов
-    List<Integer> rightAnswers = new ArrayList<>();             // массив правильных ответов
+    ArrayList<String> questions = new ArrayList<>();            // массив выражений
+    List<String> userAnswers = new ArrayList<>();              // массив пользовательских ответов
+    List<String> rightAnswers = new ArrayList<>();             // массив правильных ответов
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class Results extends AppCompatActivity {
         userAnswersHeader = findViewById(R.id.userAnswersHeader);
         rightAnswersArrayLinearLayout = findViewById(R.id.rightAnswersArrayLinearLayout);
         userAnswersArrayLinearLayout = findViewById(R.id.userAnswersArrayLinearLayout);
+        questionsArrayLinearLayout = findViewById(R.id.questionsArrayLinearLayout);
         navigationDrawerLayout = findViewById(R.id.navigation_drawer_layout);
         menuIcon = findViewById(R.id.menu_icon);
         title = findViewById(R.id.title_of_appBar);
@@ -74,10 +77,13 @@ public class Results extends AppCompatActivity {
         txtTime.setText(getResources().getString(R.string.solution_time) + " " + getTimerText(time));
 
         // получение пользовательских ответов
-        userAnswers = intent.getIntegerArrayListExtra("userAnswers");
+        userAnswers = intent.getStringArrayListExtra("userAnswers");
 
         // получение верных ответов
-        rightAnswers = intent.getIntegerArrayListExtra("rightAnswers");
+        rightAnswers = intent.getStringArrayListExtra("rightAnswers");
+
+        // получение массива выражений
+        questions = intent.getStringArrayListExtra("questions");
 
         generateTextViewFromArray();
 
@@ -143,8 +149,13 @@ public class Results extends AppCompatActivity {
             userItem.setTypeface(Typeface.DEFAULT_BOLD);
             userItem.setLayoutParams(textViewLayoutParams);
 
+            // натройка оформления вывода примеров
+            TextView que = new TextView(Results.this, null, 0, R.style.custom_right_answers);
+            que.setTypeface(Typeface.DEFAULT_BOLD);
+            que.setLayoutParams(textViewLayoutParams);
+
             // установка цвета ответа
-            if(Integer.toString(rightAnswers.get(i)) == Integer.toString(userAnswers.get(i))){
+            if(Integer.parseInt(rightAnswers.get(i)) == Integer.parseInt(userAnswers.get(i))){
                 userItem.setBackgroundResource(R.drawable.custom_right_answers_background);
             } else {
                 userItem.setBackgroundResource(R.drawable.custom_wrong_answers_background);
@@ -154,12 +165,16 @@ public class Results extends AppCompatActivity {
             }
 
             // вывод текущего верного ответа
-            rightItem.setText(Integer.toString(rightAnswers.get(i)));
+            rightItem.setText(rightAnswers.get(i));
             rightAnswersArrayLinearLayout.addView(rightItem);
 
             // вывод текущего пользовательського ответа
-            userItem.setText(Integer.toString(userAnswers.get(i)));
+            userItem.setText(userAnswers.get(i));
             userAnswersArrayLinearLayout.addView(userItem);
+
+            // вывод текущего пользовательського ответа
+            que.setText(questions.get(i));
+            questionsArrayLinearLayout.addView(que);
         }
     }
 }

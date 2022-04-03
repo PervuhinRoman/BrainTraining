@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -49,8 +50,8 @@ public class Training extends AppCompatActivity {
     String action;                    // элемент действия для выражения
     String prevAction;
 
-    ArrayList<Integer> userAnswers = new ArrayList<>();              // массив пользовательских ответов
-    ArrayList<Integer> rightAnswers = new ArrayList<>();             // массив правильных ответов
+    ArrayList<String> userAnswers = new ArrayList<>();              // массив пользовательских ответов
+    ArrayList<String> rightAnswers = new ArrayList<>();             // массив правильных ответов
     ArrayList<String> questions = new ArrayList<>();                 // массив выражений
 
     int number;                       // элемент цифры для выражения
@@ -83,7 +84,7 @@ public class Training extends AppCompatActivity {
         Log.d(LOG_TAG, "Expressions count from MainActivity: " + questionsCount);
 
         // создание "нулевого" выражения
-        onButtonClick();
+        generation0();
 
         // общий listener для кнопок
         View.OnClickListener buttonsClickListener = new View.OnClickListener(){
@@ -91,13 +92,13 @@ public class Training extends AppCompatActivity {
             public void onClick(View v) {
                 switch (v.getId()){
                     case R.id.button1:
-                        optimize(ans1);
+                        onBtnClick(ans1);
                         break;
                     case R.id.button2:
-                        optimize(ans2);
+                        onBtnClick(ans2);
                         break;
                     case R.id.button3:
-                        optimize(ans3);
+                        onBtnClick(ans3);
                         break;
                 }
             }
@@ -111,7 +112,7 @@ public class Training extends AppCompatActivity {
 
     // основной метод генерации
     @SuppressLint("SetTextI18n")
-    public void onButtonClick(){
+    public void generation0(){
         // генерация и добавления первой случайной цифры в диапозоне: 1 - 9
         number = (int)(Math.random() * 9 + 1);
         question += Integer.toString(number);
@@ -158,7 +159,7 @@ public class Training extends AppCompatActivity {
         question = "";
 
         // добавляем вычисленный правильный ответ в массив правильных ответов
-        rightAnswers.add(rightAnswer);
+        rightAnswers.add(Integer.toString(rightAnswer));
 
         // случайным образом присваиваем праильный ответ одной из конопок выбора ответа
 
@@ -200,6 +201,46 @@ public class Training extends AppCompatActivity {
         rightAnswer = 0;
     }
 
+    // метод выполняющейся при нажатии на один из вариантов ответа
+    void onBtnClick(Button ans){
+        // добавление пользовательского ответа в массив пользовательских ответов
+        userAnswers.add(ans.getText().toString());
+        Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers + '\n' + questions);
+
+        // проверка кол-ва решённых выражений
+        if(currentExp == questionsCount - 1){
+            // остановка таймера
+            timerTask.cancel();
+
+            // создание intent-а для передачи данных между activity и открытия новых активностей
+            Intent intent = new Intent(getApplicationContext(), Results.class);
+
+            // передаём кол-во выражений в Results
+            intent.putExtra("expressionsCount", questionsCount);
+
+            // передаём время выполнения в Results
+            intent.putExtra("time", time);
+
+            // передаём массив выражений в Results
+            intent.putExtra("questions", (Serializable) questions);
+
+            // передаём массив пользовательских ответов в Results
+            intent.putExtra("userAnswers", (Serializable) userAnswers);
+
+            // передаём массив правильных ответов в Results
+            intent.putExtra("rightAnswers", (Serializable) rightAnswers);
+
+            // запускаем новую активность
+            startActivity(intent);
+        }
+
+        // генерация следующего выражения
+        generation0();
+
+        // увеличение кол-ва решённых выражений
+        currentExp++;
+    }
+
     // метод запуска таймера
     private void startTimer()
     {
@@ -235,42 +276,5 @@ public class Training extends AppCompatActivity {
     // форматирование вывода времени
     String formatTime(int seconds, int minutes) {
         return String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
-    }
-
-    // метод выполняющейся при нажатии на один из вариантов ответа
-    void optimize(Button ans){
-        // добавление пользовательского ответа в массив пользовательских ответов
-        userAnswers.add(Integer.parseInt(ans.getText().toString()));
-        Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers + '\n' + questions);
-
-        // проверка кол-ва решённых выражений
-        if(currentExp == questionsCount - 1){
-            // остановка таймера
-            timerTask.cancel();
-
-            // создание intent-а для передачи данных между activity и открытия новых активностей
-            Intent intent = new Intent(getApplicationContext(), Results.class);
-
-            // передаём кол-во выражений в Results
-            intent.putExtra("expressionsCount", questionsCount);
-
-            // передаём время выполнения в Results
-            intent.putExtra("time", time);
-
-            // передаём массив пользовательских ответов в Results
-            intent.putExtra("userAnswers", (Serializable) userAnswers);
-
-            // передаём массив правильных ответов в Results
-            intent.putExtra("rightAnswers", (Serializable) rightAnswers);
-
-            // запускаем новую активность
-            startActivity(intent);
-        }
-
-        // генерация следующего выражения
-        onButtonClick();
-
-        // увеличение кол-ва решённых выражений
-        currentExp++;
     }
 }

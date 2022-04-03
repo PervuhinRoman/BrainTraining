@@ -12,6 +12,7 @@
     <string name="solution_time">Time:</string>
     <string name="mistakes_count">Mistakes:</string>
     <string name="userAnswersHeader">Your answers:</string>
+    <string name="questionsHeader">Questions:</string>
     <string name="rightAnswersHeader">Right answers:</string>
     <string name="btnAgain">Again</string>
     <string name="btnGoHome">Home</string>

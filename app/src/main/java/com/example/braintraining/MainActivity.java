@@ -1,11 +1,13 @@
 package com.example.braintraining;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     int defaultExpressionsCount = 25;
     int defaultNumbersCount = 3;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +57,11 @@ public class MainActivity extends AppCompatActivity {
         title.setText(getResources().getString(R.string.title_of_mainActivity));
 
         // установка дефолтного значения кол-ва выражений
-        expressionsCount.setProgress(defaultExpressionsCount * 2);
+        expressionsCount.setProgress(defaultExpressionsCount);
         txtExpressionsCount.setText(Integer.toString(defaultExpressionsCount));
 
         // установка дефолтного значения кол-ва чисел
-        numbersCount.setProgress(defaultNumbersCount * 10);
+        numbersCount.setProgress(defaultNumbersCount);
         txtNumbersCount.setText(Integer.toString(defaultNumbersCount));
 
         // открытие меню по нжатию на гамбургер меню
@@ -95,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     Intent intent = new Intent(getApplicationContext(), Training.class);
                     intent.putExtra("expressionsCount", Integer.parseInt(txtExpressionsCount.getText().toString()));
+                    intent.putExtra("numbersCount", Integer.parseInt(txtNumbersCount.getText().toString()));
                     startActivity(intent);
                 } catch (NumberFormatException e){
                     // обработка исключения: пустая строка кол-ва выражений
@@ -105,11 +109,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        expressionsCount.setMax(50);
+        expressionsCount.setMin(1);
         expressionsCount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                txtExpressionsCount.setText(Integer.toString(progress / 2));
+                txtExpressionsCount.setText(Integer.toString(progress));
             }
 
             @Override
@@ -119,10 +124,12 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
+        numbersCount.setMax(10);
+        numbersCount.setMin(2);
         numbersCount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                txtNumbersCount.setText(Integer.toString(progress / 10));
+                txtNumbersCount.setText(Integer.toString(progress));
             }
 
             @Override
