@@ -13,12 +13,12 @@
         <!-- <item android:id="@+id/settings"
             android:icon="@drawable/outline_settings_24"
             android:title="@string/settings"/> -->
-        <item android:id="@+id/remove_ad"
+        <!-- <item android:id="@+id/remove_ad"
             android:icon="@drawable/outline_shop_24"
-            android:title="@string/remove_ad"/>
-        <item android:id="@+id/secret_key"
+            android:title="@string/remove_ad"/> -->
+        <!-- <item android:id="@+id/secret_key"
             android:icon="@drawable/outline_key_24"
-            android:title="@string/secret_key"/>
+            android:title="@string/secret_key"/> -->
         <item android:id="@+id/about"
             android:icon="@drawable/outline_info_24"
             android:title="@string/about_app"/>
