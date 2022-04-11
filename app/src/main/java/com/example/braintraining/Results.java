@@ -38,7 +38,7 @@ public class Results extends AppCompatActivity {
     int expressionsCount = 0;
     Double time = 0.0;
 
-    ArrayList<String> questions = new ArrayList<>();            // массив выражений
+    ArrayList<String> questions = new ArrayList<>();           // массив выражений
     List<String> userAnswers = new ArrayList<>();              // массив пользовательских ответов
     List<String> rightAnswers = new ArrayList<>();             // массив правильных ответов
 
