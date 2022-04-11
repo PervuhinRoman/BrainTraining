@@ -39,16 +39,10 @@ public class Training extends AppCompatActivity {
     // для генерации выражений
     String question = "";             // выражение
     int questionsCount;               // кол-во выражений
-    int numbersCount;                 // кол-во чисел в выражении
-    int answersRange;                 // диапазон ответов
     int rightAnswer = 0;              // правильный ответ
-
-    ArrayList<Integer> alreadyGeneratedNumbers = new ArrayList<>(); // для генерации
-    ArrayList<Integer> alreadyGeneratedAnswers = new ArrayList<>(); // для генерации
 
     String[] actions = {"+", "-"};    // список действий
     String action;                    // элемент действия для выражения
-    String prevAction;
 
     ArrayList<String> userAnswers = new ArrayList<>();              // массив пользовательских ответов
     ArrayList<String> rightAnswers = new ArrayList<>();             // массив правильных ответов

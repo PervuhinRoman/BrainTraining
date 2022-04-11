@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
         btnStart = findViewById(R.id.btn_start);
         expressionsCount = findViewById(R.id.expressions_count_seekBar);
-        numbersCount = findViewById(R.id.numbers_count_seekBar);
+        //numbersCount = findViewById(R.id.numbers_count_seekBar);
         txtExpressionsCount = findViewById(R.id.expressions_count);
-        txtNumbersCount = findViewById(R.id.numbers_count);
+        //txtNumbersCount = findViewById(R.id.numbers_count);
         title = findViewById(R.id.title_of_appBar);
 
         navigationDrawerLayout = findViewById(R.id.navigation_drawer_layout);
@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
         txtExpressionsCount.setText(Integer.toString(defaultExpressionsCount));
 
         // установка дефолтного значения кол-ва чисел
-        numbersCount.setProgress(defaultNumbersCount);
-        txtNumbersCount.setText(Integer.toString(defaultNumbersCount));
+        //numbersCount.setProgress(defaultNumbersCount);
+        //txtNumbersCount.setText(Integer.toString(defaultNumbersCount));
 
         // открытие меню по нжатию на гамбургер меню
         menuIcon.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     Intent intent = new Intent(getApplicationContext(), Training.class);
                     intent.putExtra("expressionsCount", Integer.parseInt(txtExpressionsCount.getText().toString()));
-                    intent.putExtra("numbersCount", Integer.parseInt(txtNumbersCount.getText().toString()));
+                    //intent.putExtra("numbersCount", Integer.parseInt(txtNumbersCount.getText().toString()));
                     startActivity(intent);
                 } catch (NumberFormatException e){
                     // обработка исключения: пустая строка кол-ва выражений
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
-        numbersCount.setMax(10);
+        /*numbersCount.setMax(10);
         numbersCount.setMin(2);
         numbersCount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -137,6 +137,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) { }
-        });
+        });*/
     }
 }
