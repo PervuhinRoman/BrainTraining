@@ -1,5 +1,6 @@
 package com.example.braintraining;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -9,11 +10,14 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +38,7 @@ public class Results extends AppCompatActivity {
     LinearLayout questionsArrayLinearLayout;
     DrawerLayout navigationDrawerLayout;
     ImageView menuIcon;
+    NavigationView navView;
 
     int expressionsCount = 0;
     Double time = 0.0;
@@ -58,6 +63,7 @@ public class Results extends AppCompatActivity {
         questionsArrayLinearLayout = findViewById(R.id.questionsArrayLinearLayout);
         navigationDrawerLayout = findViewById(R.id.navigation_drawer_layout);
         menuIcon = findViewById(R.id.menu_icon);
+        navView = findViewById(R.id.navigation);
         title = findViewById(R.id.title_of_appBar);
         title.setText(R.string.title_of_resultsActivity);
 
@@ -67,6 +73,25 @@ public class Results extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 navigationDrawerLayout.openDrawer(Gravity.START);
+            }
+        });
+
+        // обработка навигации
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id){
+                    case R.id.about:
+                        Intent newIntent = new Intent(getApplicationContext(), AboutApp.class);
+                        startActivity(newIntent);
+                        break;
+                    case R.id.start_training:
+                        newIntent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(newIntent);
+                        break;
+                }
+                return true;
             }
         });
 
