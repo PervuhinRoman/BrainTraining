@@ -29,17 +29,24 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:paddingTop="20dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
                 android:orientation="vertical" >
 
-                <org.sufficientlysecure.htmltextview.HtmlTextView
-                android:id="@+id/html_text_about"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp" />
+                <WebView
+                    android:id="@+id/web_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
+                <ImageView
+                    android:id="@+id/btn_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_next_button_60"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="50dp"/>
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
