@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/navigation_drawer_title"
-        style="@style/custom_text"
-        android:textSize="36sp"
+        android:textSize="30sp"
+        android:textColor="@color/black"
         android:textFontWeight="1000"
         android:layout_marginStart="16dp"
         android:layout_gravity="start"/>

@@ -3,6 +3,7 @@
     android:id="@+id/navigation_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -44,7 +45,7 @@
                     android:id="@+id/btn_next"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_next_button_60"
+                    app:srcCompat="@drawable/ic_next_button"
                     android:layout_gravity="center"
                     android:layout_marginBottom="50dp"/>
             </LinearLayout>

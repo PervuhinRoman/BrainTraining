@@ -3,6 +3,7 @@
     android:id="@+id/navigation_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -22,10 +23,12 @@
         <TextView
             android:id="@+id/start_training"
             android:layout_width="wrap_content"
+            android:maxWidth="273dp"
             android:layout_height="wrap_content"
             android:text="@string/start_training"
             style="@style/custom_text"
-            android:textSize="20sp"
+            android:textSize="24sp"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +42,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/start_training"
-            app:srcCompat="@drawable/ic_next_button_60" />
+            app:srcCompat="@drawable/ic_next_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

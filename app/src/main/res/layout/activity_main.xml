@@ -3,6 +3,7 @@
     android:id="@+id/navigation_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
@@ -67,7 +68,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/expressions_count_seekBar"
-            app:srcCompat="@drawable/ic_start_button_60" />
+            app:srcCompat="@drawable/ic_start_button" />
 
         <!--<TextView
             android:id="@+id/enter_numbers_count"

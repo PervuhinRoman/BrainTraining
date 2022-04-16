@@ -14,5 +14,6 @@
     <color name="noColor">#e74c3c</color>
     <color name="testColor">#feca57</color>
     <color name="myWhite">#F5F5F5</color>
+    <color name="background_color">#F1F2F4</color>
     <color name="myBlack">#212121</color>
 </resources>
