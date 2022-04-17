@@ -17,4 +17,9 @@
 
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
+
+    <style name="SplashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="colorPrimaryDark">@color/white</item>
+    </style>
 </resources>
