@@ -2,13 +2,16 @@ package com.example.braintraining;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +24,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class Results extends AppCompatActivity {
 
@@ -166,17 +170,17 @@ public class Results extends AppCompatActivity {
 
             // натройка оформления вывода правильного ответа
             TextView rightItem = new TextView(Results.this, null, 0, R.style.custom_right_answers);
-            rightItem.setTypeface(Typeface.DEFAULT_BOLD);
+            rightItem.setTypeface(ResourcesCompat.getFont(getApplicationContext(), R.font.roboto_bold));
             rightItem.setLayoutParams(textViewLayoutParams);
 
             // натройка оформления вывода пользовательского ответа
             TextView userItem = new TextView(Results.this, null, 0, R.style.custom_wrong_answers);
-            userItem.setTypeface(Typeface.DEFAULT_BOLD);
+            userItem.setTypeface(ResourcesCompat.getFont(getApplicationContext(), R.font.roboto_bold));
             userItem.setLayoutParams(textViewLayoutParams);
 
             // натройка оформления вывода примеров
             TextView que = new TextView(Results.this, null, 0, R.style.custom_right_answers);
-            que.setTypeface(Typeface.DEFAULT_BOLD);
+            que.setTypeface(ResourcesCompat.getFont(getApplicationContext(), R.font.roboto_bold));
             que.setLayoutParams(textViewLayoutParams);
 
             // установка цвета ответа

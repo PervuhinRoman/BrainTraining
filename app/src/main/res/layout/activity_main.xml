@@ -28,7 +28,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="50dp"
             android:text="@string/enter_number_of_expressions"
-            android:textSize="20sp"
+            style="@style/main_body"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/included_app_bar" />
 
@@ -43,7 +43,7 @@
             android:inputType="number"
             android:minHeight="48dp"
             android:text=""
-            android:textSize="20sp"
+            style="@style/main_body"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/enter_number_of_expressions"
             app:layout_constraintTop_toBottomOf="@+id/included_app_bar" />

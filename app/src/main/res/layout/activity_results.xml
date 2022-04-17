@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/solution_time"
-            android:textSize="20sp"
+            style="@style/main_body"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/included_app_bar"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/mistakes_count"
-            android:textSize="20sp"
+            style="@style/main_body"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/solution_time" />
@@ -54,7 +54,7 @@
                 android:id="@+id/questionsHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                style="@style/main_body"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:text="@string/questionsHeader" />
@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/userAnswersHeader"
-                android:textSize="20sp"
+                style="@style/main_body"
                 android:gravity="center"
                 android:layout_weight="1"/>
 
@@ -73,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/rightAnswersHeader"
-                android:textSize="20sp"
+                style="@style/main_body"
                 android:gravity="center"
                 android:layout_weight="1"/>
 
@@ -97,7 +97,7 @@
 
                 <LinearLayout
                     android:id="@+id/questionsArrayLinearLayout"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1">
@@ -105,7 +105,7 @@
 
                 <LinearLayout
                     android:id="@+id/userAnswersArrayLinearLayout"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1">
@@ -113,7 +113,7 @@
 
                 <LinearLayout
                     android:id="@+id/rightAnswersArrayLinearLayout"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1">
@@ -134,14 +134,12 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnAgain"
-                style="@style/custom_button"
-                android:layout_weight="1"
+                style="@style/results_button"
                 android:text="@string/btnAgain" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnGoHome"
-                style="@style/custom_button"
-                android:layout_weight="1"
+                style="@style/results_button"
                 android:text="@string/btnGoHome" />
         </LinearLayout>
 
