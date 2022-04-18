@@ -126,6 +126,7 @@ public class Results extends AppCompatActivity {
                 time = 0.0;
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -144,6 +145,7 @@ public class Results extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Training.class);
                 intent.putExtra("expressionsCount", expressionsCount);
                 startActivity(intent);
+                finish();
             }
         });
     }

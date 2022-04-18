@@ -226,6 +226,7 @@ public class Training extends AppCompatActivity {
 
             // запускаем новую активность
             startActivity(intent);
+            finish();
         }
 
         // генерация следующего выражения
