@@ -36,17 +36,15 @@ public class Training extends AppCompatActivity {
     TimerTask timerTask;
     Double time = 0.0;
 
-    // для генерации выражений
+    // ================================ для генерации выражений ====================================
     String question = "";             // выражение
     int questionsCount;               // кол-во выражений
-    int rightAnswer = 0;              // правильный ответ
-
-    String[] actions = {"+", "-"};    // список действий
-    String action;                    // элемент действия для выражения
 
     ArrayList<String> userAnswers = new ArrayList<>();              // массив пользовательских ответов
+    ArrayList<String> questions = new ArrayList<>();                // массив выражений
     ArrayList<String> rightAnswers = new ArrayList<>();             // массив правильных ответов
-    ArrayList<String> questions = new ArrayList<>();                 // массив выражений
+    ArrayList<ArrayList<String>> answers = new ArrayList<>();       // ответы
+    // =============================================================================================
 
     int number;                       // элемент цифры для выражения
     int currentExp = 0;               // кол-во решённых выражений
@@ -75,10 +73,13 @@ public class Training extends AppCompatActivity {
         // кол-во выражений, которые необходимо решить, полученное из MainActivity
         Intent expressionsCountIntent = getIntent();
         questionsCount = expressionsCountIntent.getIntExtra("expressionsCount", 50);
+        questions = expressionsCountIntent.getStringArrayListExtra("questions");
+        rightAnswers = expressionsCountIntent.getStringArrayListExtra("rightAnswers");
+        answers = (ArrayList<ArrayList<String>>) expressionsCountIntent.getSerializableExtra("answers");
         Log.d(LOG_TAG, "Expressions count from MainActivity: " + questionsCount);
+        Log.d(LOG_TAG, "Answers: " + answers);
 
-        // создание "нулевого" выражения
-        generation0();
+        set(0);
 
         // общий listener для кнопок
         View.OnClickListener buttonsClickListener = new View.OnClickListener(){
@@ -104,95 +105,16 @@ public class Training extends AppCompatActivity {
         ans3.setOnClickListener(buttonsClickListener);
     }
 
-    // основной метод генерации
-    @SuppressLint("SetTextI18n")
-    public void generation0(){
-        // генерация и добавления первой случайной цифры в диапозоне: 1 - 9
-        number = (int)(Math.random() * 9 + 1);
-        question += Integer.toString(number);
-        question+=" ";
+    void set(int i){
+        /*ans1.setText(answers.get(i).get(0));
+        ans2.setText(answers.get(i).get(1));
+        ans3.setText(answers.get(i).get(2));*/
+        ans1.setText("1");
+        ans2.setText("2");
+        ans3.setText("3");
 
-        // начало счёта праильного ответа
-        rightAnswer += number;
-
-        // первое действие
-        action = actions[(int)(Math.random()*2)];
-        question += action;
-        question+=" ";
-
-        // генерация и добавления второй случайной цифры в диапозоне: 1 - 9
-        number = (int)(Math.random() * 9 + 1);
-        question += Integer.toString(number);
-        question+=" ";
-
-        // добавления вычислений к праильному ответу | второе действие должно отличаться от первого
-        if(action == "-"){
-            rightAnswer -= number;
-            action = "+";
-            question += action;
-        } else if(action == "+"){
-            rightAnswer += number;
-            action = "-";
-            question += action;
-        }
-        question+=" ";
-
-        // генерация и добавления третей случайной цифры в диапозоне: 1 - 9
-        number = (int)(Math.random() * 9 + 1);
-        question += Integer.toString(number);
-
-        if(action == "-"){
-            rightAnswer -= number;
-        } else if(action == "+"){
-            rightAnswer += number;
-        }
-
-        // готовое выражение
-        questions.add(question);
+        question = questions.get(i);
         txtQuestion.setText(question);
-        question = "";
-
-        // добавляем вычисленный правильный ответ в массив правильных ответов
-        rightAnswers.add(Integer.toString(rightAnswer));
-
-        // случайным образом присваиваем праильный ответ одной из конопок выбора ответа
-
-        number = (int)(Math.random() * 3 + 1);
-        switch (number){
-            case 1:
-                // присваивание праильного значения выбранной случайным образом кнопке
-                ans1.setText(Integer.toString(rightAnswer));
-
-                // генерация неверных ответов для оставшихся кнопок
-                number = (int)(Math.random() * 20 - 20);
-                ans2.setText(Integer.toString(number));
-                number = (int)(Math.random() * 20 - 20);
-                ans3.setText(Integer.toString(number));
-                break;
-            case 2:
-                // присваивание праильного значения выбранной случайным образом кнопке
-                ans2.setText(Integer.toString(rightAnswer));
-
-                // генерация неверных ответов для оставшихся кнопок
-                number = (int)(Math.random() * 20 - 20);
-                ans1.setText(Integer.toString(number));
-                number = (int)(Math.random() * 20 - 20);
-                ans3.setText(Integer.toString(number));
-                break;
-            case 3:
-                // присваивание праильного значения выбранной случайным образом кнопке
-                ans3.setText(Integer.toString(rightAnswer));
-
-                // генерация неверных ответов для оставшихся кнопок
-                number = (int)(Math.random() * 20 - 20);
-                ans1.setText(Integer.toString(number));
-                number = (int)(Math.random() * 20 - 20);
-                ans2.setText(Integer.toString(number));
-                break;
-        }
-
-        // обнуляем переменную правильного ответа
-        rightAnswer = 0;
     }
 
     // метод выполняющейся при нажатии на один из вариантов ответа
@@ -229,11 +151,9 @@ public class Training extends AppCompatActivity {
             finish();
         }
 
-        // генерация следующего выражения
-        generation0();
-
         // увеличение кол-ва решённых выражений
         currentExp++;
+        set(currentExp);
     }
 
     // метод запуска таймера

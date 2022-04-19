@@ -67,17 +67,27 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/expressions_count_seekBar"
+            app:layout_constraintTop_toBottomOf="@+id/numbers_count_seekBar"
             app:srcCompat="@drawable/ic_start_button" />
 
-        <!--<TextView
+        <ImageView
+            android:id="@+id/btn_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/numbers_count_seekBar"
+            app:srcCompat="@drawable/ic_play_button" />
+
+        <TextView
             android:id="@+id/enter_numbers_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="50dp"
             android:text="@string/enter_numbers_count"
-            android:textSize="20sp"
+            style="@style/main_body"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/expressions_count_seekBar" />
 
@@ -92,7 +102,7 @@
             android:inputType="number"
             android:minHeight="48dp"
             android:text=""
-            android:textSize="20sp"
+            style="@style/main_body"
             app:layout_constraintStart_toStartOf="@+id/expressions_count"
             app:layout_constraintTop_toBottomOf="@+id/expressions_count_seekBar" />
 
@@ -106,7 +116,7 @@
             android:thumbTint="@color/myBlack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/enter_numbers_count" />-->
+            app:layout_constraintTop_toBottomOf="@+id/enter_numbers_count" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
