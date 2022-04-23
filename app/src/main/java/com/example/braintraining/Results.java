@@ -49,14 +49,14 @@ public class Results extends AppCompatActivity {
 
     ArrayList<String> questions = new ArrayList<>();           // массив выражений
     List<String> userAnswers = new ArrayList<>();              // массив пользовательских ответов
-    List<String> rightAnswers = new ArrayList<>();             // массив правильных ответов
+    List<Integer> rightAnswers = new ArrayList<>();             // массив правильных ответов
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
-        btnAgain = findViewById(R.id.btnAgain);
+        //btnAgain = findViewById(R.id.btnAgain);
         btnGoHome = findViewById(R.id.btnGoHome);
         txtTime = findViewById(R.id.solution_time);
         txtMistakes = findViewById(R.id.mistakes_count);
@@ -89,10 +89,12 @@ public class Results extends AppCompatActivity {
                     case R.id.about:
                         Intent newIntent = new Intent(getApplicationContext(), AboutApp.class);
                         startActivity(newIntent);
+                        finish();
                         break;
                     case R.id.start_training:
                         newIntent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(newIntent);
+                        finish();
                         break;
                 }
                 return true;
@@ -109,7 +111,7 @@ public class Results extends AppCompatActivity {
         userAnswers = intent.getStringArrayListExtra("userAnswers");
 
         // получение верных ответов
-        rightAnswers = intent.getStringArrayListExtra("rightAnswers");
+        rightAnswers = intent.getIntegerArrayListExtra("rightAnswers");
 
         // получение массива выражений
         questions = intent.getStringArrayListExtra("questions");
@@ -125,25 +127,6 @@ public class Results extends AppCompatActivity {
             public void onClick(View view) {
                 time = 0.0;
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        // обработка нажатия на кнопку Again
-        btnAgain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // обнуление времени решения задания
-                time = 0.0;
-                // получение кол-ва выражений из предыдущей (Training) activity
-                //Intent expressionsCountIntent = getIntent();
-                expressionsCount = intent.getIntExtra("expressionsCount", 50);
-                Log.d(LOG_TAG, "Expressions count from Training: " + expressionsCount);
-
-                // передача кол-ва выражений в Training activity
-                Intent intent = new Intent(getApplicationContext(), Training.class);
-                intent.putExtra("expressionsCount", expressionsCount);
                 startActivity(intent);
                 finish();
             }
@@ -186,7 +169,7 @@ public class Results extends AppCompatActivity {
             que.setLayoutParams(textViewLayoutParams);
 
             // установка цвета ответа
-            if(Integer.parseInt(rightAnswers.get(i)) == Integer.parseInt(userAnswers.get(i))){
+            if(rightAnswers.get(i) == Integer.parseInt(userAnswers.get(i))){
                 userItem.setBackgroundResource(R.drawable.custom_right_answers_background);
             } else {
                 userItem.setBackgroundResource(R.drawable.custom_wrong_answers_background);
@@ -196,7 +179,7 @@ public class Results extends AppCompatActivity {
             }
 
             // вывод текущего верного ответа
-            rightItem.setText(rightAnswers.get(i));
+            rightItem.setText(Integer.toString(rightAnswers.get(i)));
             rightAnswersArrayLinearLayout.addView(rightItem);
 
             // вывод текущего пользовательського ответа

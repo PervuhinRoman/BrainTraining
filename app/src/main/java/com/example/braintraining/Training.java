@@ -1,12 +1,15 @@
 package com.example.braintraining;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -42,7 +45,7 @@ public class Training extends AppCompatActivity {
 
     ArrayList<String> userAnswers = new ArrayList<>();              // массив пользовательских ответов
     ArrayList<String> questions = new ArrayList<>();                // массив выражений
-    ArrayList<String> rightAnswers = new ArrayList<>();             // массив правильных ответов
+    ArrayList<Integer> rightAnswers = new ArrayList<>();             // массив правильных ответов
     ArrayList<ArrayList<String>> answers = new ArrayList<>();       // ответы
     // =============================================================================================
 
@@ -74,7 +77,7 @@ public class Training extends AppCompatActivity {
         Intent expressionsCountIntent = getIntent();
         questionsCount = expressionsCountIntent.getIntExtra("expressionsCount", 50);
         questions = expressionsCountIntent.getStringArrayListExtra("questions");
-        rightAnswers = expressionsCountIntent.getStringArrayListExtra("rightAnswers");
+        rightAnswers = expressionsCountIntent.getIntegerArrayListExtra("rightAnswers");
         answers = (ArrayList<ArrayList<String>>) expressionsCountIntent.getSerializableExtra("answers");
         Log.d(LOG_TAG, "Expressions count from MainActivity: " + questionsCount);
         Log.d(LOG_TAG, "Answers: " + answers);
@@ -88,12 +91,15 @@ public class Training extends AppCompatActivity {
                 switch (v.getId()){
                     case R.id.button1:
                         onBtnClick(ans1);
+                        Log.d(LOG_TAG, "curr: " + currentExp);
                         break;
                     case R.id.button2:
                         onBtnClick(ans2);
+                        Log.d(LOG_TAG, "curr: " + currentExp);
                         break;
                     case R.id.button3:
                         onBtnClick(ans3);
+                        Log.d(LOG_TAG, "curr: " + currentExp);
                         break;
                 }
             }
@@ -106,12 +112,9 @@ public class Training extends AppCompatActivity {
     }
 
     void set(int i){
-        /*ans1.setText(answers.get(i).get(0));
+        ans1.setText(answers.get(i).get(0));
         ans2.setText(answers.get(i).get(1));
-        ans3.setText(answers.get(i).get(2));*/
-        ans1.setText("1");
-        ans2.setText("2");
-        ans3.setText("3");
+        ans3.setText(answers.get(i).get(2));
 
         question = questions.get(i);
         txtQuestion.setText(question);
@@ -121,12 +124,19 @@ public class Training extends AppCompatActivity {
     void onBtnClick(Button ans){
         // добавление пользовательского ответа в массив пользовательских ответов
         userAnswers.add(ans.getText().toString());
-        Log.d(LOG_TAG, '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers + '\n' + questions);
+        currentExp++;
+
+        Log.d(LOG_TAG, '\n' + "Question: " + question + '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers + '\n' + questions);
 
         // проверка кол-ва решённых выражений
-        if(currentExp == questionsCount - 1){
+        if(currentExp == questionsCount){
             // остановка таймера
             timerTask.cancel();
+
+            txtQuestion.setText(R.string.finish);
+            ans1.setVisibility(View.GONE);
+            ans2.setVisibility(View.GONE);
+            ans3.setVisibility(View.GONE);
 
             // создание intent-а для передачи данных между activity и открытия новых активностей
             Intent intent = new Intent(getApplicationContext(), Results.class);
@@ -149,11 +159,9 @@ public class Training extends AppCompatActivity {
             // запускаем новую активность
             startActivity(intent);
             finish();
+        } else {
+            set(currentExp);
         }
-
-        // увеличение кол-ва решённых выражений
-        currentExp++;
-        set(currentExp);
     }
 
     // метод запуска таймера

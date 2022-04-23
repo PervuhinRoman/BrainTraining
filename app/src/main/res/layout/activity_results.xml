@@ -132,10 +132,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <androidx.appcompat.widget.AppCompatButton
+            <!--<androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnAgain"
                 style="@style/results_button"
-                android:text="@string/btnAgain" />
+                android:text="@string/btnAgain" />-->
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnGoHome"

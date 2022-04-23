@@ -51,11 +51,6 @@
         <SeekBar
             android:id="@+id/expressions_count_seekBar"
             style="@style/seekbar_style"
-            android:layout_marginTop="20dp"
-            android:padding="0dp"
-            android:progressBackgroundTint="@color/myBlack"
-            android:progressTint="@color/myBlack"
-            android:thumbTint="@color/myBlack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/enter_number_of_expressions" />
@@ -109,14 +104,42 @@
         <SeekBar
             android:id="@+id/numbers_count_seekBar"
             style="@style/seekbar_style"
-            android:layout_marginTop="20dp"
-            android:padding="0dp"
-            android:progressBackgroundTint="@color/myBlack"
-            android:progressTint="@color/myBlack"
-            android:thumbTint="@color/myBlack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/enter_numbers_count" />
+
+        <TextView
+            android:id="@+id/enter_answer_range"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/enter_answer_range"
+            style="@style/main_body"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/numbers_count_seekBar" />
+
+        <SeekBar
+            android:id="@+id/answer_range_seekBar"
+            style="@style/seekbar_style"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/enter_answer_range" />
+
+        <EditText
+            android:id="@+id/answers_range"
+            style="@style/main_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@null"
+            android:gravity="center"
+            android:hint="1 - 50"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:text=""
+            app:layout_constraintStart_toStartOf="@+id/numbers_count"
+            app:layout_constraintTop_toBottomOf="@+id/numbers_count_seekBar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

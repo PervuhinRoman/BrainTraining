@@ -24,6 +24,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,8 +35,10 @@ public class MainActivity extends AppCompatActivity {
     ImageView btnPlay;
     SeekBar expressionsCount;
     SeekBar skBarNumbersCount;
+    SeekBar skBarAnswersRange;
     EditText txtExpressionsCount;
     EditText txtNumbersCount;
+    EditText txtAnswersRange;
     TextView title;
     ImageView menuIcon;
     DrawerLayout navigationDrawerLayout;
@@ -43,16 +46,17 @@ public class MainActivity extends AppCompatActivity {
 
     int defaultExpressionsCount = 25;
     int defaultNumbersCount = 3;
+    int defaultAnswersRange = 10;
 
     // ================================ для генерации выражений ====================================
     String question = "";
     int rightAnswer;
 
-    int questionsCount;            // пользовательский ввод | кол-во выражений
-    int numbersCount;              // пользовательский ввод | кол-во чисел в выражении
-    final int numbersRange = 10;
+    int questionsCount = 25;            // пользовательский ввод | кол-во выражений
+    int numbersCount = 3;              // пользовательский ввод | кол-во чисел в выражении
+    final int numbersRange = 9;
     final int answersCount = 3;    // пользовательский ввод | кол-во ответов
-    int answersRange;              // пользовательский ввод | диапазон ответов
+    int answersRange = 10;              // пользовательский ввод | диапазон ответов
 
     ArrayList<String> alreadyGeneratedNumbers = new ArrayList<>(); // для генерации
     ArrayList<Integer> alreadyGeneratedAnswers = new ArrayList<>(); // для генерации
@@ -76,12 +80,14 @@ public class MainActivity extends AppCompatActivity {
         btnPlay = findViewById(R.id.btn_play);
         expressionsCount = findViewById(R.id.expressions_count_seekBar);
         skBarNumbersCount = findViewById(R.id.numbers_count_seekBar);
+        skBarAnswersRange = findViewById(R.id.answer_range_seekBar);
+        txtAnswersRange = findViewById(R.id.answers_range);
         txtExpressionsCount = findViewById(R.id.expressions_count);
         txtNumbersCount = findViewById(R.id.numbers_count);
         title = findViewById(R.id.title_of_appBar);
 
         // кнопки изначально
-        //btnStart.setVisibility(View.VISIBLE);
+        btnStart.setVisibility(View.VISIBLE);
         btnPlay.setVisibility(View.GONE);
 
         navigationDrawerLayout = findViewById(R.id.navigation_drawer_layout);
@@ -98,6 +104,10 @@ public class MainActivity extends AppCompatActivity {
         // установка дефолтного значения кол-ва чисел
         skBarNumbersCount.setProgress(defaultNumbersCount);
         txtNumbersCount.setText(Integer.toString(defaultNumbersCount));
+
+        // установка дефолтного значения диапазона чисел
+        skBarAnswersRange.setProgress(defaultAnswersRange);
+        txtAnswersRange.setText(Integer.toString(defaultAnswersRange));
 
         // =================================== навигация ===========================================
         // открытие меню по нжатию на гамбургер меню
@@ -118,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.about:
                         Intent newIntent = new Intent(getApplicationContext(), AboutApp.class);
                         startActivity(newIntent);
+                        finish();
                         break;
                     case R.id.start_training:
                         newIntent = new Intent(getApplicationContext(), MainActivity.class);
@@ -132,18 +143,13 @@ public class MainActivity extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    for(int i = 0; i < questionsCount; i++) {
-                        mGen();
-                    }
-                    Log.d(LOG_TAG, "exp: " + expressions);
-                    btnPlay.setVisibility(View.VISIBLE);
-                } catch (NumberFormatException e){
-                    // обработка исключения: пустая строка кол-ва выражений
-                    Toast nfeToast = Toast.makeText(getApplicationContext(), getResources().getText(R.string.enter_the_expressions_count), Toast.LENGTH_SHORT);
-                    nfeToast.setGravity(Gravity.CENTER, 0, 0);
-                    nfeToast.show();
+                for(int i = 0; i < questionsCount; i++) {
+                    mGen();
                 }
+                btnStart.setVisibility(View.GONE);
+                btnPlay.setVisibility(View.VISIBLE);
+                Log.d(LOG_TAG, "expressions: " + expressions);
+                Log.d(LOG_TAG, "Answers: " + answers);
             }
         });
 
@@ -155,16 +161,23 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("questions", (Serializable) expressions);
                 intent.putExtra("answers", (Serializable) answers);
                 intent.putExtra("rightAnswers", (Serializable) rightAnswers);
+
+                btnStart.setVisibility(View.VISIBLE);
+                btnPlay.setVisibility(View.GONE);
+
                 startActivity(intent);
+                finish();
             }
         });
 
         expressionsCount.setMax(50);
-        expressionsCount.setMin(1);
+        expressionsCount.setMin(2);
         expressionsCount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
                 txtExpressionsCount.setText(Integer.toString(progress));
+                questionsCount = progress;
+                Log.d(LOG_TAG, "questionsCount: " + questionsCount);
             }
 
             @Override
@@ -174,12 +187,31 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
-        skBarNumbersCount.setMax(10);
+        skBarNumbersCount.setMax(4);
         skBarNumbersCount.setMin(2);
         skBarNumbersCount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
                 txtNumbersCount.setText(Integer.toString(progress));
+                numbersCount = progress;
+                Log.d(LOG_TAG, "numbersCount: " + numbersCount);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) { }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) { }
+        });
+
+        skBarAnswersRange.setMax(100);
+        skBarAnswersRange.setMin(5);
+        skBarAnswersRange.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                txtAnswersRange.setText(Integer.toString(progress));
+                answersRange = progress;
+                Log.d(LOG_TAG, "answersRange: " + answersRange);
             }
 
             @Override
@@ -192,14 +224,14 @@ public class MainActivity extends AppCompatActivity {
     // ====================================== генерация ========================================
     // генерация чисел для выражения
     void numberGeneration(int  numbersCount, int numbersRange){
-        String number = Integer.toString((int)(Math.random() * (numbersRange - 1) + 1));
+        String number = Integer.toString((int)(Math.random() * numbersRange + 1));
 
         for(int i = 0; i < numbersCount; i++) {
 
             // проверка
             while (alreadyGeneratedNumbers.size() > 0 && alreadyGeneratedNumbers.contains(number)) {
                 // генерация
-                number = Integer.toString((int) (Math.random() * (numbersRange + 1) + 1));
+                number = Integer.toString((int) (Math.random() * numbersRange + 1));
             }
             alreadyGeneratedNumbers.add(number);
         }
@@ -234,25 +266,33 @@ public class MainActivity extends AppCompatActivity {
 
     void mGen(){
         numberGeneration(numbersCount, numbersRange);
-        ArrayList<String> itemAnswers = new ArrayList<>();
+        ArrayList<String> itemAnswers = new ArrayList<>(3);
         String number;
         String action;
 
         // генерация первого числа
         number = alreadyGeneratedNumbers.get(0);
         question += number;
+        question+=" ";
 
         // начинаем считать правильный ответ
         rightAnswer = Integer.parseInt(number);
 
         for(int i = 1; i < alreadyGeneratedNumbers.size(); i++){
+            Log.d(LOG_TAG, "loop" + i);
             // генерируем действие и добавляем в выражение
             action = actionGeneration(actions);
             question += action;
+            question+=" ";
 
             // генерация числа и добавление в выражение
             number = alreadyGeneratedNumbers.get(i);
             question += number;
+            if(i == alreadyGeneratedNumbers.size() - 1){
+                question+="";
+            } else {
+                question+=" ";
+            }
 
             // считаем правильный ответ
             switch (action) {
@@ -264,11 +304,13 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         }
+        Log.d(LOG_TAG, "question: " + question);
 
         // генерация случайных ответов
         int rightAnsInd = (int)(Math.random() * (answersCount) + 0);
 
         for(int i = 0; i < answersCount; i++){
+            Log.d(LOG_TAG, "LOOP" + i);
             if(i == rightAnsInd){
                 itemAnswers.add(Integer.toString(rightAnswer));
             } else {
@@ -290,6 +332,7 @@ public class MainActivity extends AppCompatActivity {
         // отчищаем массив рандомных ответов и т.д.
         alreadyGeneratedNumbers.clear();
         alreadyGeneratedAnswers.clear();
+        Log.d(LOG_TAG, "Method finished");
     }
     // =========================================================================================
 }

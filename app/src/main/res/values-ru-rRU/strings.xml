@@ -27,4 +27,6 @@
     <string name="enter_the_expressions_count">Введите кол-во выражений</string>
     <string name="title_of_aboutActivity">О приложении</string>
     <string name="questionsHeader">Примеры:</string>
+    <string name="enter_answer_range">Диапазон ответов</string>
+    <string name="finish">Финиш!</string>
 </resources>

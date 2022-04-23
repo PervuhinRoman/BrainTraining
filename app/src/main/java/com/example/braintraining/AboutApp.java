@@ -87,6 +87,7 @@ public class AboutApp extends AppCompatActivity {
                     case R.id.start_training:
                         newIntent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(newIntent);
+                        finish();
                         break;
                 }
                 return true;

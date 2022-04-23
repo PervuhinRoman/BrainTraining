@@ -5,7 +5,11 @@
     <string name="title_of_mainActivity">Test options</string>
     <string name="enter_number_of_expressions">Expressions count:</string>
     <string name="enter_numbers_count">Numbers count:</string>
+    <string name="enter_answer_range">Answers range:</string>
     <string name="enter_the_expressions_count">Enter the expressions count</string>
+
+    <!-- TrainingActivity -->
+    <string name="finish">Finish!</string>
 
     <!-- ResultsActivity -->
     <string name="title_of_resultsActivity">Results</string>
