@@ -1,46 +1,29 @@
 package com.example.braintraining;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Spanned;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-import org.sufficientlysecure.htmltextview.HtmlFormatter;
-import org.sufficientlysecure.htmltextview.HtmlFormatterBuilder;
-import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
-import org.sufficientlysecure.htmltextview.HtmlTextView;
-import org.sufficientlysecure.htmltextview.OnClickATagListener;
-
-import java.io.IOException;
 
 public class AboutApp extends AppCompatActivity {
 
-    public static final String LOG_TAG = "THR";
-
-    TextView title;
-    ImageView btnNext;
-    WebView webView;
-    ImageView menuIcon;
-    DrawerLayout navigationDrawerLayout;
-    NavigationView navigationView;
+    private TextView title;
+    private ImageView btnNext;
+    private WebView webView;
+    private ImageView menuIcon;
+    private DrawerLayout navigationDrawerLayout;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -7,67 +7,64 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "ArraysState";
 
-    ImageView btnStart;
-    ImageView btnPlay;
-    SeekBar expressionsCount;
-    SeekBar skBarNumbersCount;
-    SeekBar skBarAnswersRange;
-    EditText txtExpressionsCount;
-    EditText txtNumbersCount;
-    EditText txtAnswersRange;
-    TextView title;
-    ImageView menuIcon;
-    DrawerLayout navigationDrawerLayout;
-    NavigationView navigationView;
+    private ImageView btnStart;
+    private ImageView btnPlay;
+    private SeekBar expressionsCount;
+    private SeekBar skBarNumbersCount;
+    private SeekBar skBarAnswersRange;
+    private EditText txtExpressionsCount;
+    private EditText txtNumbersCount;
+    private EditText txtAnswersRange;
+    private TextView title;
+    private ImageView menuIcon;
+    private DrawerLayout navigationDrawerLayout;
+    private NavigationView navigationView;
 
-    int defaultExpressionsCount = 25;
-    int defaultNumbersCount = 3;
-    int defaultAnswersRange = 10;
+    private final int defaultExpressionsCount = 25;
+    private final int defaultNumbersCount = 3;
+    private final int defaultAnswersRange = 10;
 
     // ================================ для генерации выражений ====================================
-    String question = "";
-    int rightAnswer;
+    private String question = "";
+    private int rightAnswer;
 
-    int questionsCount = 25;            // пользовательский ввод | кол-во выражений
-    int numbersCount = 3;              // пользовательский ввод | кол-во чисел в выражении
-    final int numbersRange = 9;
-    final int answersCount = 3;    // пользовательский ввод | кол-во ответов
-    int answersRange = 10;              // пользовательский ввод | диапазон ответов
+    private int questionsCount = 25;            // пользовательский ввод | кол-во выражений
+    private int numbersCount = 3;               // пользовательский ввод | кол-во чисел в выражении
+    private final int numbersRange = 9;
+    private final int answersCount = 3;         // пользовательский ввод | кол-во ответов
+    private int answersRange = 10;              // пользовательский ввод | диапазон ответов
 
-    ArrayList<String> alreadyGeneratedNumbers = new ArrayList<>(); // для генерации
-    ArrayList<Integer> alreadyGeneratedAnswers = new ArrayList<>(); // для генерации
+    private final ArrayList<String> alreadyGeneratedNumbers = new ArrayList<>(); // для генерации
+    private final ArrayList<Integer> alreadyGeneratedAnswers = new ArrayList<>(); // для генерации
 
-    String[] actions = {"+", "-"}; // для генерации
-    String prevAction;             // для генерации
+    private final String[] actions = {"+", "-"}; // для генерации
+    private String prevAction;                   // для генерации
 
-    ArrayList<ArrayList<String>> answers = new ArrayList<>();   // ответы
+    private final ArrayList<ArrayList<String>> answers = new ArrayList<>();   // ответы
 
-    ArrayList<Integer> rightAnswers = new ArrayList<>();             // массив правильных ответов
-    ArrayList<String> expressions = new ArrayList<>();               // массив выражений
+    private final ArrayList<Integer> rightAnswers = new ArrayList<>();             // массив правильных ответов
+    private final ArrayList<String> expressions = new ArrayList<>();               // массив выражений
     // =============================================================================================
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -75,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         btnStart = findViewById(R.id.btn_start);
         btnPlay = findViewById(R.id.btn_play);
@@ -90,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         btnStart.setVisibility(View.VISIBLE);
         btnPlay.setVisibility(View.GONE);
 
+        // для обраьотки навигации
         navigationDrawerLayout = findViewById(R.id.navigation_drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
         menuIcon = findViewById(R.id.menu_icon);
@@ -140,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
         });
         // =========================================================================================
 
+        // кнопка генерации
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // кнопка старта теста
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -170,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // кол-во выражений
         expressionsCount.setMax(50);
         expressionsCount.setMin(2);
         expressionsCount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -187,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
+        // кол-во чисел в выражении
         skBarNumbersCount.setMax(4);
         skBarNumbersCount.setMin(2);
         skBarNumbersCount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -204,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
+        // диапазон ответов
         skBarAnswersRange.setMax(100);
         skBarAnswersRange.setMin(5);
         skBarAnswersRange.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -221,9 +225,10 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) { }
         });
     }
+
     // ====================================== генерация ========================================
     // генерация чисел для выражения
-    void numberGeneration(int  numbersCount, int numbersRange){
+    private void numberGeneration(int  numbersCount, int numbersRange){
         String number = Integer.toString((int)(Math.random() * numbersRange + 1));
 
         for(int i = 0; i < numbersCount; i++) {
@@ -238,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // генерация действия
-    String actionGeneration(String[] actions){
+    private String actionGeneration(String[] actions){
         String action = actions[(int) (Math.random() * 2)];
 
         while(action.equals(prevAction)) {
@@ -251,7 +256,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // генерация случайных ответов
-    String answerGeneration(int rightAnswer, int answersRange){
+    private String answerGeneration(int rightAnswer, int answersRange){
         int number = (int)(Math.random() * (answersRange + 1) - (answersRange + 1));
 
         // проверка
@@ -264,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
         return Integer.toString(number);
     }
 
-    void mGen(){
+    private void mGen(){
         numberGeneration(numbersCount, numbersRange);
         ArrayList<String> itemAnswers = new ArrayList<>(3);
         String number;

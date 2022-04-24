@@ -7,11 +7,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Point;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,44 +21,37 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class Results extends AppCompatActivity {
 
     private static final String LOG_TAG = "ArraysState";
 
-    Button btnAgain;
-    Button btnGoHome;
-    TextView txtTime;
-    TextView txtMistakes;
-    TextView title;
-    TextView rightAnswersHeader;
-    TextView userAnswersHeader;
-    LinearLayout rightAnswersArrayLinearLayout;
-    LinearLayout userAnswersArrayLinearLayout;
-    LinearLayout questionsArrayLinearLayout;
-    DrawerLayout navigationDrawerLayout;
-    ImageView menuIcon;
-    NavigationView navView;
+    private Button btnGoHome;
+    private TextView txtTime;
+    private TextView txtMistakes;
+    private TextView title;
+    private LinearLayout rightAnswersArrayLinearLayout;
+    private LinearLayout userAnswersArrayLinearLayout;
+    private LinearLayout questionsArrayLinearLayout;
+    private DrawerLayout navigationDrawerLayout;
+    private ImageView menuIcon;
+    private NavigationView navView;
 
-    int expressionsCount = 0;
-    Double time = 0.0;
+    private int expressionsCount = 0;
+    private Double time = 0.0;
 
-    ArrayList<String> questions = new ArrayList<>();           // массив выражений
-    List<String> userAnswers = new ArrayList<>();              // массив пользовательских ответов
-    List<Integer> rightAnswers = new ArrayList<>();             // массив правильных ответов
+    private ArrayList<String> questions = new ArrayList<>();           // массив выражений
+    private List<String> userAnswers = new ArrayList<>();              // массив пользовательских ответов
+    private List<Integer> rightAnswers = new ArrayList<>();             // массив правильных ответов
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
-        //btnAgain = findViewById(R.id.btnAgain);
         btnGoHome = findViewById(R.id.btnGoHome);
         txtTime = findViewById(R.id.solution_time);
         txtMistakes = findViewById(R.id.mistakes_count);
-        rightAnswersHeader = findViewById(R.id.rightAnswersHeader);
-        userAnswersHeader = findViewById(R.id.userAnswersHeader);
         rightAnswersArrayLinearLayout = findViewById(R.id.rightAnswersArrayLinearLayout);
         userAnswersArrayLinearLayout = findViewById(R.id.userAnswersArrayLinearLayout);
         questionsArrayLinearLayout = findViewById(R.id.questionsArrayLinearLayout);
@@ -134,7 +124,7 @@ public class Results extends AppCompatActivity {
     }
 
     // получение времени
-    String getTimerText(Double time) {
+    private String getTimerText(Double time) {
         int rounded = (int) Math.round(time);
         int seconds = ((rounded % 86400) % 3600) % 60;
         int minutes = ((rounded % 86400) % 3600) / 60;
@@ -143,11 +133,12 @@ public class Results extends AppCompatActivity {
     }
 
     // форматирование вывода времени
-    String formatTime(int seconds, int minutes) {
+    private String formatTime(int seconds, int minutes) {
         return String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
     }
 
-    void generateTextViewFromArray(){
+    // создание таблички пример | ответ юзера | правильный ответ
+    private void generateTextViewFromArray(){
         for(int i = 0; i < userAnswers.size(); i++){
             // настройка layout атрибутов
             LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);

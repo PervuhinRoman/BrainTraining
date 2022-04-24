@@ -1,15 +1,11 @@
 package com.example.braintraining;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,7 +14,6 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -27,32 +22,30 @@ public class Training extends AppCompatActivity {
     private static final String LOG_TAG = "ArraysState";
 
     // взаимодействие с UI
-    Button ans1;
-    Button ans2;
-    Button ans3;
-    TextView txtQuestion;
-    TextView title;
-    ImageView menuIcon;
+    private Button ans1;
+    private Button ans2;
+    private Button ans3;
+    private TextView txtQuestion;
+    private TextView title;
+    private ImageView menuIcon;
 
     // для таймера
-    Timer timer;
-    TimerTask timerTask;
-    Double time = 0.0;
+    private Timer timer;
+    private TimerTask timerTask;
+    private Double time = 0.0;
 
     // ================================ для генерации выражений ====================================
-    String question = "";             // выражение
-    int questionsCount;               // кол-во выражений
+    private String question = "";             // выражение
+    private int questionsCount;               // кол-во выражений
 
-    ArrayList<String> userAnswers = new ArrayList<>();              // массив пользовательских ответов
-    ArrayList<String> questions = new ArrayList<>();                // массив выражений
-    ArrayList<Integer> rightAnswers = new ArrayList<>();             // массив правильных ответов
-    ArrayList<ArrayList<String>> answers = new ArrayList<>();       // ответы
+    private final ArrayList<String> userAnswers = new ArrayList<>();        // массив пользовательских ответов
+    private ArrayList<String> questions = new ArrayList<>();                // массив выражений
+    private ArrayList<Integer> rightAnswers = new ArrayList<>();            // массив правильных ответов
+    private ArrayList<ArrayList<String>> answers = new ArrayList<>();       // ответы
     // =============================================================================================
 
-    int number;                       // элемент цифры для выражения
-    int currentExp = 0;               // кол-во решённых выражений
+    private int currentExp = 0;               // кол-во решённых выражений
 
-    //@RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +75,7 @@ public class Training extends AppCompatActivity {
         Log.d(LOG_TAG, "Expressions count from MainActivity: " + questionsCount);
         Log.d(LOG_TAG, "Answers: " + answers);
 
+        // установка первого выражения
         set(0);
 
         // общий listener для кнопок
@@ -111,7 +105,8 @@ public class Training extends AppCompatActivity {
         ans3.setOnClickListener(buttonsClickListener);
     }
 
-    void set(int i){
+    // функция установки выражения и ответов на экран
+    private void set(int i){
         ans1.setText(answers.get(i).get(0));
         ans2.setText(answers.get(i).get(1));
         ans3.setText(answers.get(i).get(2));
@@ -121,7 +116,7 @@ public class Training extends AppCompatActivity {
     }
 
     // метод выполняющейся при нажатии на один из вариантов ответа
-    void onBtnClick(Button ans){
+    private void onBtnClick(Button ans){
         // добавление пользовательского ответа в массив пользовательских ответов
         userAnswers.add(ans.getText().toString());
         currentExp++;
@@ -188,7 +183,7 @@ public class Training extends AppCompatActivity {
     }
 
     // получение времени
-    String getTimerText() {
+    private String getTimerText() {
         int rounded = (int) Math.round(time);
         int seconds = ((rounded % 86400) % 3600) % 60;
         int minutes = ((rounded % 86400) % 3600) / 60;
@@ -197,7 +192,7 @@ public class Training extends AppCompatActivity {
     }
 
     // форматирование вывода времени
-    String formatTime(int seconds, int minutes) {
+    private String formatTime(int seconds, int minutes) {
         return String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
     }
 }

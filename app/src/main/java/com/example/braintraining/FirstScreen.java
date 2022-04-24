@@ -17,11 +17,11 @@ import com.google.android.material.navigation.NavigationView;
 
 public class FirstScreen extends AppCompatActivity {
 
-    ImageView btnNext;
-    TextView title;
-    ImageView menuIcon;
-    DrawerLayout navigationDrawerLayout;
-    NavigationView navigationView;
+    private ImageView btnNext;
+    private TextView title;
+    private ImageView menuIcon;
+    private DrawerLayout navigationDrawerLayout;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
