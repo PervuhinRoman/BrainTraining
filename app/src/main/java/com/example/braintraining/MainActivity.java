@@ -1,6 +1,7 @@
 package com.example.braintraining;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -20,6 +22,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.yandex.mobile.ads.banner.AdSize;
+import com.yandex.mobile.ads.banner.BannerAdEventListener;
+import com.yandex.mobile.ads.banner.BannerAdView;
+import com.yandex.mobile.ads.common.AdRequest;
+import com.yandex.mobile.ads.common.AdRequestError;
+import com.yandex.mobile.ads.common.ImpressionData;
 import com.yandex.mobile.ads.common.InitializationListener;
 import com.yandex.mobile.ads.common.MobileAds;
 
@@ -30,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "ArraysState";
     private static final String YANDEX_MOBILE_ADS_TAG = "YandexAds";
+
+    private static final String AdUnitId = "adf-279013/966631";
+    private BannerAdView mBannerAdView;
 
     private ImageView btnStart;
     private ImageView btnPlay;
@@ -83,6 +94,52 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(YANDEX_MOBILE_ADS_TAG, "SDK initialized");
             }
         });
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+        AdSize size = new AdSize(displayMetrics.widthPixels, 100);
+
+        mBannerAdView = findViewById(R.id.banner_ad_view);
+        mBannerAdView.setAdUnitId(AdUnitId);
+        mBannerAdView.setAdSize(AdSize.BANNER_320x50);
+
+        final AdRequest adRequest = new AdRequest.Builder().build();
+
+        mBannerAdView.setBannerAdEventListener(new BannerAdEventListener() {
+            @Override
+            public void onAdLoaded() {
+
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull AdRequestError adRequestError) {
+
+            }
+
+            @Override
+            public void onAdClicked() {
+
+            }
+
+            @Override
+            public void onLeftApplication() {
+
+            }
+
+            @Override
+            public void onReturnedToApplication() {
+
+            }
+
+            @Override
+            public void onImpression(@Nullable ImpressionData impressionData) {
+
+            }
+        });
+
+        // Загрузка объявления.
+        mBannerAdView.loadAd(adRequest);
 
         btnStart = findViewById(R.id.btn_start);
         btnPlay = findViewById(R.id.btn_play);
