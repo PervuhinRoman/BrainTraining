@@ -20,6 +20,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.yandex.mobile.ads.common.InitializationListener;
+import com.yandex.mobile.ads.common.MobileAds;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "ArraysState";
+    private static final String YANDEX_MOBILE_ADS_TAG = "YandexAds";
 
     private ImageView btnStart;
     private ImageView btnPlay;
@@ -73,6 +76,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        MobileAds.initialize(this, new InitializationListener() {
+            @Override
+            public void onInitializationCompleted() {
+                Log.d(YANDEX_MOBILE_ADS_TAG, "SDK initialized");
+            }
+        });
 
         btnStart = findViewById(R.id.btn_start);
         btnPlay = findViewById(R.id.btn_play);
