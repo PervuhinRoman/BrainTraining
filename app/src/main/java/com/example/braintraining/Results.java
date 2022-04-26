@@ -8,7 +8,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,8 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Results extends AppCompatActivity {
-
-    private static final String LOG_TAG = "ArraysState";
 
     private Button btnGoHome;
     private TextView txtTime;
@@ -94,7 +91,6 @@ public class Results extends AppCompatActivity {
         // получение времени выполнения задания
         Intent intent = getIntent();
         time = intent.getDoubleExtra("time", 0.0);
-        Log.d(LOG_TAG, "Time from Training: " + time);
         txtTime.setText(getResources().getString(R.string.solution_time) + " " + getTimerText(time));
 
         // получение пользовательских ответов

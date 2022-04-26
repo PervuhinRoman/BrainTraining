@@ -1,7 +1,6 @@
 package com.example.braintraining;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -11,8 +10,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,21 +19,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
-import com.yandex.mobile.ads.banner.AdSize;
-import com.yandex.mobile.ads.banner.BannerAdEventListener;
 import com.yandex.mobile.ads.banner.BannerAdView;
-import com.yandex.mobile.ads.common.AdRequest;
-import com.yandex.mobile.ads.common.AdRequestError;
-import com.yandex.mobile.ads.common.ImpressionData;
-import com.yandex.mobile.ads.common.InitializationListener;
-import com.yandex.mobile.ads.common.MobileAds;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String LOG_TAG = "ArraysState";
 
     private BannerAdView mBannerAdView;
     private ImageView btnStart;
@@ -164,8 +153,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 btnStart.setVisibility(View.GONE);
                 btnPlay.setVisibility(View.VISIBLE);
-                Log.d(LOG_TAG, "expressions: " + expressions);
-                Log.d(LOG_TAG, "Answers: " + answers);
             }
         });
 
@@ -195,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
                 txtExpressionsCount.setText(Integer.toString(progress));
                 questionsCount = progress;
-                Log.d(LOG_TAG, "questionsCount: " + questionsCount);
             }
 
             @Override
@@ -213,7 +199,6 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
                 txtNumbersCount.setText(Integer.toString(progress));
                 numbersCount = progress;
-                Log.d(LOG_TAG, "numbersCount: " + numbersCount);
             }
 
             @Override
@@ -231,7 +216,6 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
                 txtAnswersRange.setText(Integer.toString(progress));
                 answersRange = progress;
-                Log.d(LOG_TAG, "answersRange: " + answersRange);
             }
 
             @Override
@@ -300,7 +284,6 @@ public class MainActivity extends AppCompatActivity {
         rightAnswer = Integer.parseInt(number);
 
         for(int i = 1; i < alreadyGeneratedNumbers.size(); i++){
-            Log.d(LOG_TAG, "loop" + i);
             // генерируем действие и добавляем в выражение
             action = actionGeneration(actions);
             question += action;
@@ -325,13 +308,11 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         }
-        Log.d(LOG_TAG, "question: " + question);
 
         // генерация случайных ответов
         int rightAnsInd = (int)(Math.random() * (answersCount) + 0);
 
         for(int i = 0; i < answersCount; i++){
-            Log.d(LOG_TAG, "LOOP" + i);
             if(i == rightAnsInd){
                 itemAnswers.add(Integer.toString(rightAnswer));
             } else {
@@ -353,7 +334,6 @@ public class MainActivity extends AppCompatActivity {
         // отчищаем массив рандомных ответов и т.д.
         alreadyGeneratedNumbers.clear();
         alreadyGeneratedAnswers.clear();
-        Log.d(LOG_TAG, "Method finished");
     }
     // =========================================================================================
 }

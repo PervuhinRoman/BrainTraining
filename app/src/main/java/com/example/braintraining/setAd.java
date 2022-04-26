@@ -13,7 +13,7 @@ import com.yandex.mobile.ads.common.ImpressionData;
 public class setAd implements Runnable{
 
     private static final String AdUnitId = "adf-279013/966631";
-    private BannerAdView mBannerAdView;
+    private final BannerAdView mBannerAdView;
 
     public setAd(BannerAdView mBannerAdView){
         this.mBannerAdView = mBannerAdView;

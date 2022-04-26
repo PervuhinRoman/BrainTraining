@@ -21,8 +21,6 @@ import java.util.TimerTask;
 
 public class Training extends AppCompatActivity {
 
-    private static final String LOG_TAG = "ArraysState";
-
     // взаимодействие с UI
     private BannerAdView mBannerAdView;
     private Button ans1;
@@ -80,8 +78,6 @@ public class Training extends AppCompatActivity {
         questions = expressionsCountIntent.getStringArrayListExtra("questions");
         rightAnswers = expressionsCountIntent.getIntegerArrayListExtra("rightAnswers");
         answers = (ArrayList<ArrayList<String>>) expressionsCountIntent.getSerializableExtra("answers");
-        Log.d(LOG_TAG, "Expressions count from MainActivity: " + questionsCount);
-        Log.d(LOG_TAG, "Answers: " + answers);
 
         // установка первого выражения
         set(0);
@@ -93,15 +89,12 @@ public class Training extends AppCompatActivity {
                 switch (v.getId()){
                     case R.id.button1:
                         onBtnClick(ans1);
-                        Log.d(LOG_TAG, "curr: " + currentExp);
                         break;
                     case R.id.button2:
                         onBtnClick(ans2);
-                        Log.d(LOG_TAG, "curr: " + currentExp);
                         break;
                     case R.id.button3:
                         onBtnClick(ans3);
-                        Log.d(LOG_TAG, "curr: " + currentExp);
                         break;
                 }
             }
@@ -128,9 +121,7 @@ public class Training extends AppCompatActivity {
         // добавление пользовательского ответа в массив пользовательских ответов
         userAnswers.add(ans.getText().toString());
         currentExp++;
-
-        Log.d(LOG_TAG, '\n' + "Question: " + question + '\n' + "RightAnswers: " + rightAnswers + '\n' + "UserAnswers: " + userAnswers + '\n' + questions);
-
+        
         // проверка кол-ва решённых выражений
         if(currentExp == questionsCount){
             // остановка таймера

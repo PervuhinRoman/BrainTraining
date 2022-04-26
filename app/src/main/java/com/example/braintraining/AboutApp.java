@@ -43,11 +43,6 @@ public class AboutApp extends AppCompatActivity {
 
         webView.loadUrl("file:///android_asset/about.html");
 
-        // парсинг текста в фоновом потоке
-        /*Thread parsing = new Thread(new Parsing());
-        parsing.start();
-        Log.d(LOG_TAG, "Поток запущен");*/
-
         // открытие меню по нжатию на гамбургер меню
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("WrongConstant")
@@ -85,27 +80,4 @@ public class AboutApp extends AppCompatActivity {
             }
         });
     }
-
-    // парсинг текста откуда-то
-    /*class Parsing implements Runnable {
-        @Override
-        public void run() {
-            // парсинг
-            Document doc = null;
-            try {
-                doc = (Document) Jsoup.connect("https://github.com/PervuhinRoman/BrainTraining/blob/master/README.md").get();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Elements readme = doc.select("#readme");
-            htmlView.post(new Runnable() {
-                @Override
-                public void run() {
-                    htmlView.setHtml(readme.toString(), new HtmlHttpImageGetter(htmlView));
-                }
-            });
-
-            Log.d(LOG_TAG,"Поток завершён");
-        }
-    }*/
 }
