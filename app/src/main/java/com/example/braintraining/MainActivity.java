@@ -37,11 +37,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "ArraysState";
-    private static final String YANDEX_MOBILE_ADS_TAG = "YandexAds";
 
-    private static final String AdUnitId = "adf-279013/966631";
     private BannerAdView mBannerAdView;
-
     private ImageView btnStart;
     private ImageView btnPlay;
     private SeekBar expressionsCount;
@@ -88,58 +85,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        MobileAds.initialize(this, new InitializationListener() {
-            @Override
-            public void onInitializationCompleted() {
-                Log.d(YANDEX_MOBILE_ADS_TAG, "SDK initialized");
-            }
-        });
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-        AdSize size = new AdSize(displayMetrics.widthPixels, 100);
-
+        // поток для рекламы
         mBannerAdView = findViewById(R.id.banner_ad_view);
-        mBannerAdView.setAdUnitId(AdUnitId);
-        mBannerAdView.setAdSize(AdSize.BANNER_320x50);
-
-        final AdRequest adRequest = new AdRequest.Builder().build();
-
-        mBannerAdView.setBannerAdEventListener(new BannerAdEventListener() {
-            @Override
-            public void onAdLoaded() {
-
-            }
-
-            @Override
-            public void onAdFailedToLoad(@NonNull AdRequestError adRequestError) {
-
-            }
-
-            @Override
-            public void onAdClicked() {
-
-            }
-
-            @Override
-            public void onLeftApplication() {
-
-            }
-
-            @Override
-            public void onReturnedToApplication() {
-
-            }
-
-            @Override
-            public void onImpression(@Nullable ImpressionData impressionData) {
-
-            }
-        });
-
-        // Загрузка объявления.
-        mBannerAdView.loadAd(adRequest);
+        Thread adsThread = new Thread(new setAd(mBannerAdView));
+        adsThread.start();
 
         btnStart = findViewById(R.id.btn_start);
         btnPlay = findViewById(R.id.btn_play);

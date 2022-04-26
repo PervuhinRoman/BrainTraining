@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.yandex.mobile.ads.banner.BannerAdView;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -22,6 +24,7 @@ public class Training extends AppCompatActivity {
     private static final String LOG_TAG = "ArraysState";
 
     // взаимодействие с UI
+    private BannerAdView mBannerAdView;
     private Button ans1;
     private Button ans2;
     private Button ans3;
@@ -51,6 +54,11 @@ public class Training extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        // поток для рекламы
+        mBannerAdView = findViewById(R.id.banner_ad_view);
+        Thread adsThread = new Thread(new setAd(mBannerAdView));
+        adsThread.start();
 
         ans1 = findViewById(R.id.button1);
         ans2 = findViewById(R.id.button2);
