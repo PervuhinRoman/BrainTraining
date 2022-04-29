@@ -176,12 +176,16 @@ public class MainActivity extends AppCompatActivity {
 
         // кол-во выражений
         expressionsCount.setMax(50);
-        expressionsCount.setMin(2);
         expressionsCount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                txtExpressionsCount.setText(Integer.toString(progress));
-                questionsCount = progress;
+                int min = 2;
+                if(progress < min) {
+                    expressionsCount.setProgress(min);
+                } else {
+                    txtExpressionsCount.setText(Integer.toString(progress));
+                    questionsCount = progress;
+                }
             }
 
             @Override
@@ -193,12 +197,16 @@ public class MainActivity extends AppCompatActivity {
 
         // кол-во чисел в выражении
         skBarNumbersCount.setMax(4);
-        skBarNumbersCount.setMin(2);
         skBarNumbersCount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                txtNumbersCount.setText(Integer.toString(progress));
-                numbersCount = progress;
+                int min = 2;
+                if(progress < min){
+                    skBarNumbersCount.setProgress(min);
+                } else {
+                    txtNumbersCount.setText(Integer.toString(progress));
+                    numbersCount = progress;
+                }
             }
 
             @Override
@@ -210,12 +218,16 @@ public class MainActivity extends AppCompatActivity {
 
         // диапазон ответов
         skBarAnswersRange.setMax(100);
-        skBarAnswersRange.setMin(5);
         skBarAnswersRange.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                txtAnswersRange.setText(Integer.toString(progress));
-                answersRange = progress;
+                int min = 5;
+                if(progress < min){
+                    skBarAnswersRange.setProgress(min);
+                } else {
+                    txtAnswersRange.setText(Integer.toString(progress));
+                    answersRange = progress;
+                }
             }
 
             @Override
