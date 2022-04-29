@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Locale;
+
 public class AboutApp extends AppCompatActivity {
 
     private TextView title;
@@ -41,7 +43,12 @@ public class AboutApp extends AppCompatActivity {
         // установка заголовка экрана
         title.setText(getResources().getString(R.string.title_of_aboutActivity));
 
-        webView.loadUrl("file:///android_asset/about.html");
+        // выбор языка описания на основе текущего языка девайса
+        if(Locale.getDefault().getLanguage() == "ru") {
+            webView.loadUrl("file:///android_asset/aboutRU.html");
+        } else {
+            webView.loadUrl("file:///android_asset/aboutEN.html");
+        }
 
         // открытие меню по нжатию на гамбургер меню
         menuIcon.setOnClickListener(new View.OnClickListener() {

@@ -121,7 +121,7 @@ public class Training extends AppCompatActivity {
         // добавление пользовательского ответа в массив пользовательских ответов
         userAnswers.add(ans.getText().toString());
         currentExp++;
-        
+
         // проверка кол-ва решённых выражений
         if(currentExp == questionsCount){
             // остановка таймера
